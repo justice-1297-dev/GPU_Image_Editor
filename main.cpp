@@ -8,37 +8,49 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
+// Holds all the application specific variables
 struct App {
-    int width;
-    int height;
-    unsigned char *img;
+    int windowWidth;
+    int windowHeight;
+    float buttonWidth;
+    float buttonHeight;
+    float buttonX;
+    float buttonY;
+    bool buttonHighlighted;
+    bool buttonClicked;
+    bool drawing = false;
     int imgWidth;
     int imgHeight;
-};
+    unsigned char* img;
+} app;
 
-void processInput(GLFWwindow *window);
+// Prototypes for user interaction
+unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels);
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 int main() {
-
-    // Load in image
+    // -------------------------------------
+    //  Load images
+    // -------------------------------------
     int width, height, channels;
-    unsigned char *img = stbi_load("../img.jpeg", &width, &height, &channels, 4);
-    channels = 4;
-    if(img == NULL) {
-        printf("Error in loading the image\n");
-        exit(1);
-    }
-    printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+    unsigned char *img = load_image("img_small.jpeg", width, height, channels);
+    app.imgWidth = width;
+    app.imgHeight = height;
+    app.img = img;
+    int buttonImgWidth, buttonImgHeight, buttonImgChannels;
+    unsigned char *buttonImg = load_image("reset.png", buttonImgWidth, buttonImgHeight, buttonImgChannels);
 
+    // -------------------------------------
+    // Create window and initialize input callbacks
+    // -------------------------------------
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-  
-    GLFWwindow* window = glfwCreateWindow(width, height, "Test Video", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(width, height, "Image Editor", NULL, NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -47,41 +59,48 @@ int main() {
     }
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    App app;
-    app.width = width;
-    app.height = height;
-    app.img = img;
-    app.imgWidth = width;
-    app.imgHeight = height;
-
-    glfwSetWindowUserPointer(window, &app);
     glfwSetCursorPosCallback(window, cursor_position_callback);
-
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+    glfwSetWindowUserPointer(window, &app);
+    app.windowWidth = width;
+    app.windowHeight = height;
 
-    // build and compile our shader program
+    // -------------------------------------
+    // Create Shader Program (Renders Image)
+    // -------------------------------------
     const char *vertexShaderSource = "#version 330 core\n"
     "layout (location = 0) in vec3 aPos;\n"
     "layout (location = 1) in vec2 coord;\n"
+    "uniform vec3 offset;\n"
+    "uniform vec3 scale;\n"
     "out vec2 interpCoord;\n"
     "void main()\n"
     "{\n"
     "   interpCoord = coord;\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    //"   float scale = 0.5;\n"
+    "   gl_Position = vec4(aPos.xyz*scale + offset, 1.0);\n"
     "}\0";
     const char *fragmentShaderSource = "#version 330 core\n"
     "out vec4 FragColor;\n"
     "uniform sampler2D tex;\n"
+    "uniform bool highlight;\n"
     "in vec2 interpCoord;\n"
     "void main()\n"
     "{\n"
-    "   FragColor = texture(tex, interpCoord);\n"
+    "   vec4 color = texture(tex, interpCoord); \n"
+    "   if (color.a < 0.9) {discard;} \n"
+    "   if (highlight) { \n"
+    "       FragColor = clamp(color*vec4(2.0,2.0,2.0,1.0), 0, 1.0); \n"
+    "   } \n"
+    "   else { \n"
+    "       FragColor = texture(tex, interpCoord);\n"
+    "   } \n"
     "}\n\0";
-    // ------------------------------------
     // vertex shader
     unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
@@ -120,8 +139,9 @@ int main() {
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    // set up vertex data (and buffer(s)) and configure vertex attributes
-    // ------------------------------------------------------------------
+    // -------------------------------------
+    // Create Textured Rectangle (For drawing images to the screen)
+    // -------------------------------------
     float vertices[] = {
          1.0f,  1.0f, 0.0f,  // top right
          1.0f, -1.0f, 0.0f,  // bottom right
@@ -144,116 +164,243 @@ int main() {
     glGenBuffers(1, &EBO);
     // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
     glBindVertexArray(VAO);
-
+    // Add the data to the VBO
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) + sizeof(coords), (void*)0, GL_STATIC_DRAW);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), &vertices);
     glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices), sizeof(coords), &coords);
-    //glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
+    // Add the elements to the EBO
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
+    // Setup vertex attributes to be used in shader
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)(sizeof(vertices)));
     glEnableVertexAttribArray(1);
-
-
-    // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
     glBindBuffer(GL_ARRAY_BUFFER, 0); 
-
-    // remember: do NOT unbind the EBO while a VAO is active as the bound element buffer object IS stored in the VAO; keep the EBO bound.
-    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-    // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
-    // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     glBindVertexArray(0); 
 
+    // -------------------------------------
+    // Create Background Texture
+    // -------------------------------------
     unsigned int texture;
     glGenTextures(1, &texture);  
     glBindTexture(GL_TEXTURE_2D, texture);  
-
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img);
     glGenerateMipmap(GL_TEXTURE_2D);
 
-    //stbi_image_free(img);
+    // -------------------------------------
+    // Create button
+    // -------------------------------------
+    float aspect = 1.0f*width/height;
+    app.buttonX = 0.01;
+    app.buttonY = 0.01;
+    app.buttonWidth = 0.1;
+    app.buttonHeight = 0.1*aspect;
+    app.buttonHighlighted = false;
+    app.buttonClicked = false;
 
+    // -------------------------------------
+    // Create Button Texture
+    // -------------------------------------
+    unsigned int buttonTexture;
+    glGenTextures(1, &buttonTexture);  
+    glBindTexture(GL_TEXTURE_2D, buttonTexture);  
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, buttonImgWidth, buttonImgHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, buttonImg);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    // -------------------------------------
+    // Set the window drawing area
+    // -------------------------------------
     glViewport(0, 0, width, height);
 
+    // -------------------------------------
+    // Loop until the window should close
+    // -------------------------------------
     while(!glfwWindowShouldClose(window))
     {
-        
+        // -------------------------------------
+        // Process window input (e.g. mouse movement, clicks, resize, etc...)
+        // -------------------------------------
+        // If the escape key is pressed, close the window
+        if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+            glfwSetWindowShouldClose(window, true);
+
+        // -------------------------------------
+        // Copy image data to the texture
+        // -------------------------------------
         glBindTexture(GL_TEXTURE_2D, texture);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img);
 
-        processInput(window);
+        // -------------------------------------
+        // Render Graphics
+        // -------------------------------------
+        {
+            // Clear the screen
+            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+            // -------------------------------------
+            // Use the shader program defined above
+            // -------------------------------------
+            glUseProgram(shaderProgram);
+            
+            // -------------------------------------
+            // Use the texture defined above
+            // -------------------------------------
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, texture);
+            int texLoc = glGetUniformLocation(shaderProgram, "tex");
+            glUniform1i(texLoc, 0);
 
-        // draw our first triangle
-        glUseProgram(shaderProgram);
-        glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-        //glDrawArrays(GL_TRIANGLES, 0, 6);
+            // -------------------------------------
+            // Draw the Texture Rectangle defined above
+            // -------------------------------------
+            int scaleLoc = glGetUniformLocation(shaderProgram, "scale");
+            glUniform3f(scaleLoc, 1.0f, 1.0f, 1.0f);
+            int offsetLoc = glGetUniformLocation(shaderProgram, "offset");
+            glUniform3f(offsetLoc, 0.0f, 0.0f, 0.0f);
+            int highlightLoc = glGetUniformLocation(shaderProgram, "highlight");
+            glUniform1i(highlightLoc, false);
+            glBindVertexArray(VAO);
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture);
-        int texLoc = glGetUniformLocation(shaderProgram, "tex");
-        glUniform1i(texLoc, 0); 
+            // -------------------------------------
+            // Use the button texture defined above
+            // -------------------------------------
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, buttonTexture);
+            texLoc = glGetUniformLocation(shaderProgram, "tex");
+            glUniform1i(texLoc, 0);
 
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+            // -------------------------------------
+            // Draw button using the Texture Rectangle defined above
+            // -------------------------------------
+            glUniform3f(scaleLoc, app.buttonWidth, app.buttonHeight, 1.0f);
+            glUniform1i(highlightLoc, app.buttonHighlighted && !app.buttonClicked);
+            glUniform3f(offsetLoc, app.buttonX*2.0-1.0 + app.buttonWidth, 1.0 - app.buttonHeight - app.buttonY*2.0, 0.0f);
+            glBindVertexArray(VAO);
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
+        }
+
+        // -------------------------------------
+        // Show window on the screen
+        // -------------------------------------
         glfwSwapBuffers(window);
-        //glfwWaitEvents();    
+
+        // -------------------------------------
+        // Check for user input (mouse movement, clicks, keyboard, etc...)
+        // -------------------------------------
         glfwPollEvents();
     }
 
+    // -------------------------------------
+    // Destroy Textured Rectangle
+    // -------------------------------------
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
-    glDeleteProgram(shaderProgram);
-    stbi_image_free(img);
 
+    // -------------------------------------
+    // Destroy Shader Program
+    // -------------------------------------
+    glDeleteProgram(shaderProgram);
+
+    // -------------------------------------
+    // Destroy Images
+    // -------------------------------------
+    stbi_image_free(img);
+    stbi_image_free(buttonImg);
+    
+    // -------------------------------------
+    // Terminate windowing application
+    // -------------------------------------
     glfwTerminate();
 
     return 0;
 }
 
-void processInput(GLFWwindow *window)
-{
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-}
-
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
     App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
-    //x = (xpos/app.width - 0.5)*2.0;
-    //y = -(ypos/app.height - 0.5)*2.0;
-    double x = xpos/app.width;
-    double y = ypos/app.height;
-    int xp = x*app.imgWidth;
-    int yp = y*app.imgHeight;
-    std::cout << xp << " " << yp << std::endl;
-    app.img[(int)(yp*app.imgWidth + xp)*4 + 0] = 255;
-    app.img[(int)(yp*app.imgWidth + xp)*4 + 1] = 0;
-    app.img[(int)(yp*app.imgWidth + xp)*4 + 2] = 0;
-    app.img[(int)(yp*app.imgWidth + xp)*4 + 3] = 255;
+    float x = xpos/app.windowWidth;
+    float y = ypos/app.windowHeight;
+    if (x >= app.buttonX && x <= app.buttonX + app.buttonWidth && y >= app.buttonY && y <= app.buttonY + app.buttonHeight ) {
+        app.buttonHighlighted = true;
+    }
+    else {
+        app.buttonHighlighted = false;
+    }
+
+    if (app.drawing) {
+        std::cout << x << " " << y << std::endl;
+        int imgX = x * app.imgWidth;
+        int imgY = y * app.imgHeight;
+        int radius = 2;
+        for (int i = imgX-radius; i < imgX+radius+1; i++) {
+            for (int j = imgY-radius; j < imgY + radius+1; j++) {
+                app.img[(j*app.imgWidth + i)*4 + 0] = 0;
+                app.img[(j*app.imgWidth + i)*4 + 1] = 0;
+                app.img[(j*app.imgWidth + i)*4 + 2] = 255;
+                app.img[(j*app.imgWidth + i)*4 + 3] = 255;
+            }
+        }
+    }
+
+    
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-    // make sure the viewport matches the new window dimensions; note that width and 
-    // height will be significantly larger than specified on retina displays.
+    // Set drawing area on window
     glViewport(0, 0, width, height);
 
+    // Update app width and height
     App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
-    app.width = width;
-    app.height = height;
+    app.windowWidth = width;
+    app.windowHeight = height;
+
+
+    float aspect = 1.0f*width/height;
+    app.buttonHeight = 0.1*aspect;
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+        App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
+        if (app.buttonHighlighted) {
+            std::cout << "Clicked" << std::endl;
+            app.buttonClicked = true;
+        }
+        else {
+            app.drawing = true;
+        }
+    }
+    if (action == GLFW_RELEASE) {
+        app.buttonClicked = false;
+        app.drawing = false;
+    }
+
+}
+
+unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels) {
+    
+    unsigned char *img = stbi_load(fileName.c_str(), &width, &height, &channels, 4);
+    channels = 4;
+    if(img == NULL) {
+        printf("Error in loading the image\n");
+        exit(1);
+    }
+    printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+
+    return img;
 }
