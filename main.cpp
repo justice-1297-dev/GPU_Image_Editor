@@ -265,10 +265,10 @@ int main() {
             // Draw the Texture Rectangle defined above
             // -------------------------------------
             int scaleLoc = glGetUniformLocation(shaderProgram, "scale");
-            glUniform3f(scaleLoc, 1.0f, 1.0f, 1.0f);
             int offsetLoc = glGetUniformLocation(shaderProgram, "offset");
-            glUniform3f(offsetLoc, 0.0f, 0.0f, 0.0f);
             int highlightLoc = glGetUniformLocation(shaderProgram, "highlight");
+            glUniform3f(scaleLoc, 1.0f, 1.0f, 1.0f);
+            glUniform3f(offsetLoc, 0.0f, 0.0f, 0.0f);
             glUniform1i(highlightLoc, false);
             glBindVertexArray(VAO);
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -278,15 +278,18 @@ int main() {
             // -------------------------------------
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, buttonTexture);
-            texLoc = glGetUniformLocation(shaderProgram, "tex");
-            glUniform1i(texLoc, 0);
+            int buttonTexLoc = glGetUniformLocation(shaderProgram, "tex");
+            glUniform1i(buttonTexLoc, 0);
 
             // -------------------------------------
             // Draw button using the Texture Rectangle defined above
             // -------------------------------------
-            glUniform3f(scaleLoc, app.buttonWidth, app.buttonHeight, 1.0f);
-            glUniform1i(highlightLoc, app.buttonHighlighted && !app.buttonClicked);
-            glUniform3f(offsetLoc, app.buttonX*2.0-1.0 + app.buttonWidth, 1.0 - app.buttonHeight - app.buttonY*2.0, 0.0f);
+            int buttonScaleLoc = glGetUniformLocation(shaderProgram, "scale");
+            int buttonOffsetLoc = glGetUniformLocation(shaderProgram, "offset");
+            int buttonHighlightLoc = glGetUniformLocation(shaderProgram, "highlight");
+            glUniform3f(buttonScaleLoc, app.buttonWidth, app.buttonHeight, 1.0f);
+            glUniform3f(buttonOffsetLoc, app.buttonX*2.0-1.0 + app.buttonWidth, 1.0 - app.buttonHeight - app.buttonY*2.0, 0.0f);
+            glUniform1i(buttonHighlightLoc, app.buttonHighlighted && !app.buttonClicked);
             glBindVertexArray(VAO);
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
