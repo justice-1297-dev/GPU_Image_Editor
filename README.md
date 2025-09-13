@@ -25,6 +25,7 @@ Define your classes and copy code out of main.cpp into the classes that you writ
    
 2. Classes should have both a header file (.h) and an implementation file (.cpp).  Be sure to add header guards and follow class practices from class.
    * Create classes within the namespace csci3081
+   * Use header guards.
    * Only use ```using namespace``` in the implementation, not the header.
    * Simple one line function implementations can be in header.
    * Only use structs for super simple objects.
