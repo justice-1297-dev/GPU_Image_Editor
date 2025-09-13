@@ -32,18 +32,22 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 int main() {
     // -------------------------------------
-    //  Load images
+    //  Load background image
     // -------------------------------------
     int width, height, channels;
     unsigned char *img = load_image("img_small.jpeg", width, height, channels);
     app.imgWidth = width;
     app.imgHeight = height;
     app.img = img;
+
+    // -------------------------------------
+    //  Load button image
+    // -------------------------------------
     int buttonImgWidth, buttonImgHeight, buttonImgChannels;
     unsigned char *buttonImg = load_image("reset.png", buttonImgWidth, buttonImgHeight, buttonImgChannels);
 
     // -------------------------------------
-    // Create window and initialize input callbacks
+    // Create window of height and width.  Initialize input callbacks
     // -------------------------------------
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -66,6 +70,10 @@ int main() {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+
+    // -------------------------------------
+    // Set the application and the window height and width
+    // -------------------------------------
     glfwSetWindowUserPointer(window, &app);
     app.windowWidth = width;
     app.windowHeight = height;
@@ -181,7 +189,7 @@ int main() {
     glBindVertexArray(0); 
 
     // -------------------------------------
-    // Create Background Texture
+    // Create Background Texture with width and height and img data
     // -------------------------------------
     unsigned int texture;
     glGenTextures(1, &texture);  
@@ -205,7 +213,7 @@ int main() {
     app.buttonClicked = false;
 
     // -------------------------------------
-    // Create Button Texture
+    // Create Button Texture with buttonImageWidth, buttonImgHeight and buttonImg data
     // -------------------------------------
     unsigned int buttonTexture;
     glGenTextures(1, &buttonTexture);  
@@ -235,7 +243,7 @@ int main() {
             glfwSetWindowShouldClose(window, true);
 
         // -------------------------------------
-        // Copy image data to the texture
+        // Copy background image data to the texture
         // -------------------------------------
         glBindTexture(GL_TEXTURE_2D, texture);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img);
@@ -334,7 +342,14 @@ int main() {
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
+    // -------------------------------------
+    // Get the applicaiton
+    // -------------------------------------
     App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
+
+    // -------------------------------------
+    // If the mouse is over the button, highlight it
+    // -------------------------------------
     float x = xpos/app.windowWidth;
     float y = ypos/app.windowHeight;
     if (x >= app.buttonX && x <= app.buttonX + app.buttonWidth && y >= app.buttonY && y <= app.buttonY + app.buttonHeight ) {
@@ -344,6 +359,9 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
         app.buttonHighlighted = false;
     }
 
+    // -------------------------------------
+    // If we are drawing, edit the background image
+    // -------------------------------------
     if (app.drawing) {
         std::cout << x << " " << y << std::endl;
         int imgX = x * app.imgWidth;
@@ -364,20 +382,30 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-    // Set drawing area on window
+    // -------------------------------------
+    // Set the window drawing area
+    // -------------------------------------
     glViewport(0, 0, width, height);
 
-    // Update app width and height
+    
+    // -------------------------------------
+    // Get the applicaiton
+    // -------------------------------------
     App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
     app.windowWidth = width;
     app.windowHeight = height;
 
-
+    // -------------------------------------
+    // update the button height
+    // -------------------------------------
     float aspect = 1.0f*width/height;
     app.buttonHeight = 0.1*aspect;
 }
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+    // -------------------------------------
+    // handle button presses and drawing
+    // -------------------------------------
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
         App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
         if (app.buttonHighlighted) {
