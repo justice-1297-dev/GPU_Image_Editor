@@ -21,12 +21,14 @@ Define your classes and copy code out of main.cpp into the classes that you writ
 ## Requirements
 
 1. Create at least the classes specified above.  You may create more classes.
+   
 2. Classes should have both a header file (.h) and an implementation file (.cpp).  Be sure to add header guards and follow class practices from class.
    * Create classes within the namespace csci3081
    * Only use ```using namespace``` in the implementation, not the header.
    * Simple one line function implementations can be in header.
    * Only use structs for super simple objects.
    * Follow the **Single Responsibility Principle**.
+     
 3. The ```main.cpp``` should be simple.  For example
    ```c++
    #include "Applicaiton.h"
@@ -40,12 +42,16 @@ Define your classes and copy code out of main.cpp into the classes that you writ
      return 0;
    }
    ```
+   
 4. Follow good memory management practices:
    * Use ```new``` and ```delete``` in c++.
    * If any memory is allocated, it must be deleted.
    * If you have dynamic memory in a class, be sure to implement a copy constructor, the assignment operator, and a destructor.
+     
 5. Implement the Reset button.  When this is clicked, it should remove the drawing on top of the background image.  One way to do this is to reload the image.
+   
 6. Create another button with a new icon.
+   
 7. When the new button is clicked it must modify the background image in some way.  Here are some options:
    * Threshold the image by intensity.
    * Grayscale the image.
