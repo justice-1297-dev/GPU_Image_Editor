@@ -21,6 +21,7 @@ Define your classes and copy code out of main.cpp into the classes that you writ
 ## Requirements
 
 1. Create at least the classes specified above.  You may create more classes.
+   * Modify the makefile appropriately to build your program.
    
 2. Classes should have both a header file (.h) and an implementation file (.cpp).  Be sure to add header guards and follow class practices from class.
    * Create classes within the namespace csci3081
