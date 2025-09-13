@@ -1,4 +1,5 @@
 # Homework 01 - Image Editing
+### Due September 26 @ 11:59pm
 
 ## Overview
 
@@ -25,6 +26,7 @@ Define your classes and copy code out of main.cpp into the classes that you writ
    * Only use ```using namespace``` in the implementation, not the header.
    * Simple one line function implementations can be in header.
    * Only use structs for super simple objects.
+   * Follow the **Single Responsibility Principle**.
 3. The ```main.cpp``` should be simple.  For example
    ```c++
    #include "Applicaiton.h"
@@ -58,3 +60,7 @@ Define your classes and copy code out of main.cpp into the classes that you writ
    * Copy the image to the clipboard.
    * Rotate the image.
    * (Many more ideas to consider) -  Be creative!
+
+## Submission
+
+Please submit your assignment to the gradescope link provided before the due date.
