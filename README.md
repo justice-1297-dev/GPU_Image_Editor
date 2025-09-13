@@ -66,7 +66,7 @@ Define your classes and copy code out of main.cpp into the classes that you writ
    * Undo the last pen stroke.
    * Copy the image to the clipboard.
    * Rotate the image.
-   * (Many more ideas to consider) -  Be creative!
+   * (Many more ideas to consider) -  Be creative!  Remember we will be hopefully releasing some of these to the world, so more diversity, the better.
 
 ## Submission
 
