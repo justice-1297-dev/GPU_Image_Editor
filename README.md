@@ -3,7 +3,7 @@
 
 ## Overview
 
-Your task in this assignment is to change the c program in [main.cpp](https://github.umn.edu/CSCI-3081-01-F25/private-hw01/blob/main/main.cpp) into a c++ program that uses classes.  You will read through the comments looking for opportunities to create objects.  You are to define the abstract data types using C++ classes.  Our image editor should have at least the following classes:
+Your task in this assignment is to change the c program in [main.cpp](https://github.umn.edu/CSCI-3081-01-F25/private-hw01/blob/main/main.cpp) into a c++ program that uses classes.  You will read through the comments looking for opportunities to create objects.  Our image editor should have at least the following classes:
 
 * Application
 * Window
