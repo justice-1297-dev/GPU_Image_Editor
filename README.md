@@ -14,7 +14,7 @@ Your task in this assignment is to change the c program in [main.cpp](https://gi
 * Button
 * (any others that you would like to add)
 
-Define your classes and copy code out of main.cpp into the classes that you write.  Be sure to change the [Makefile](https://github.umn.edu/CSCI-3081-01-F25/private-hw01/blob/main/Makefile) to build your all your classes.  We may build or explore a few of these abstract data types during class or in lab.
+Define your classes and copy code out of main.cpp into the classes that you write.  Be sure to change the [Makefile](https://github.umn.edu/CSCI-3081-01-F25/private-hw01/blob/main/Makefile) to build your all your classes.  We may build or explore a few of these  classes during lecture or in lab.
 
 **Single Responsibility Design Principle (High Cohesion)** - Be sure that every class does only one thing and does it well.  Be sure that every method does one thing and one thing well.
 
