@@ -63,4 +63,24 @@ Define your classes and copy code out of main.cpp into the classes that you writ
 
 ## Submission
 
-Please submit your assignment to the gradescope link provided before the due date.
+Please submit all your files (excpet the build directory) to the gradescope link provided by the due date.
+
+## Getting Started
+
+### On the CSE lab machines (TA Support)
+
+Consider using Vole for remote development here:  [Vole - Virtual Online Linux Environment](https://cse.umn.edu/cseit/self-help-guides/virtual-online-linux-environment-vole)
+
+* Clone the repository
+  ```bash
+  git clone https://github.umn.edu/CSCI-3081-01-F25/public-hw01.git hw01
+  cd hw01
+  ```
+* Build the program
+  ```bash
+  make
+  ```
+* Run the program
+  ```bash
+  ./build/ImageEditor
+  ```
