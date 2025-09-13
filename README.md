@@ -2,6 +2,40 @@
 
 ## Overview
 
-Your task in this assignment is to change the c program in [main.cpp](https://github.umn.edu/CSCI-3081-01-F25/private-hw01/blob/main/main.cpp) into a c++ program that uses classes.  You will read through the comments looking for opportunities to create objects.  You are to define the abstract data types using C++ classes.  An image editor probably has classes like Application, Image, Window, Texture, TexturedRectange, etc...
+Your task in this assignment is to change the c program in [main.cpp](https://github.umn.edu/CSCI-3081-01-F25/private-hw01/blob/main/main.cpp) into a c++ program that uses classes.  You will read through the comments looking for opportunities to create objects.  You are to define the abstract data types using C++ classes.  An image editor has classes like:
+
+* Application
+* Window
+* Image
+* Texture
+* TexturedRectange
+* ShaderProgram
+* Button
+* (any others that you would like to add)
 
 Define your classes and copy code out of main.cpp into the classes that you write.  Be sure to change the [Makefile](https://github.umn.edu/CSCI-3081-01-F25/private-hw01/blob/main/Makefile) to build your all your classes.  We may build or explore a few of these abstract data types during class or in lab.
+
+**Single Responsibility Design Principle (High Cohesion)** - Be sure that every class does only one thing and does it well.  Be sure that every method does one thing and one thing well.
+
+## Requirements
+
+1. Create at least the classes specified above.  You may create more classes.
+2. Classes should have both a header file (.h) and an implementation file (.cpp).  Be sure to add header guards and follow class practices from class.
+   * Only use ```using namespace``` in the implementation, not the header.
+   * Simple one line function implementations can be in header.
+   * Only use structs for super simple objects.
+3. The ```main.cpp``` should be simple.  For example
+   ```c++
+   #include "Applicaiton.h"
+
+   int main() {
+     Application app;
+     app.run();
+   
+     return 0;
+   }
+   ```
+4. Follow good memory management practices:
+   * Use ```new``` and ```delete``` in c++.
+   * If any memory is allocated, it must be deleted.
+   * If you have dynamic memory in a class, be sure to implement a copy constructor, the assignment operator, and a destructor.
