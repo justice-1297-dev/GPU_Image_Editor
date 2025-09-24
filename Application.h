@@ -2,7 +2,7 @@
 #define APPLICATION_H
 
 namespace csci3081{
-class Allpication{
+class Applicaton{
 public:
     Application();
     int run();
