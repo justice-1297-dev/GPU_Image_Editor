@@ -1,4 +1,4 @@
-#include "Applicaiton.h"
+#include "Applicaton.h"
 
 int main() {
     using namespace csci3081;
