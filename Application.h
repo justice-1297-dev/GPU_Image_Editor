@@ -2,7 +2,8 @@
 #define APPLICATION_H
 
 namespace csci3081{
-class Applicaton{
+
+class Application{
 public:
     Application();
     int run();
