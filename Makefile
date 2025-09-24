@@ -5,6 +5,10 @@ build/main.o: main.cpp
 	mkdir -p build
 	g++ -I. -Ilib -c main.cpp -o build/main.o
 
+build/Application.o: Application.cpp Application.h
+	mkdir -p build
+	g++ -I. -Ilib -c Application.cpp -o build/Application.o
+
 build/glad.o: lib/glad/glad.c 
 	mkdir -p build
 	g++ -I. -Ilib -c lib/glad/glad.c -o build/glad.o
