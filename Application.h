@@ -5,10 +5,10 @@ namespace csci3081{
 class Allpication{
 public:
     Application();
-    void run();
+    int run();
 private:
 
-}
+};
 
 }
 

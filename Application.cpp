@@ -1,4 +1,4 @@
-
+#include "Application.h"
 
 #include <iostream>
 
@@ -35,7 +35,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 Application::Application(){}
 
-Application::run() {
+int Application::run() {
     // -------------------------------------
     //  Load background image
     // -------------------------------------
