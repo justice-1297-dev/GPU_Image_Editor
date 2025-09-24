@@ -9,7 +9,6 @@ namespace csci3081{
 class Texture {
 public:
     Texture::Texture(){
-        unsigned int texture;
         glGenTextures(1, &texture);  
         glBindTexture(GL_TEXTURE_2D, texture);  
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	

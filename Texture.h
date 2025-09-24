@@ -9,6 +9,7 @@ public:
     void use();
 
 private:
+    unsigned int texture;
 };
 
 }
