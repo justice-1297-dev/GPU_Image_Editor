@@ -161,7 +161,7 @@ int Application::run() {
     // Create Textured Rectangle (For drawing images to the screen)
     // -------------------------------------
 
-    TextureRectangle texRec(vertices, coords, indices);
+    TextureRectangle texRec();
     // float vertices[] = {
     //      1.0f,  1.0f, 0.0f,  // top right
     //      1.0f, -1.0f, 0.0f,  // bottom right
