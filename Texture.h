@@ -5,7 +5,7 @@ namespace csci3081{
 
 class Texture {
 public:
-    Texture(int width, int height, unsigned char* img);
+    Texture(const Image& img);
     ~Texture();
     void use(unsigned int shaderProgram);
     void copyToGPU(int width, int height, unsigned char* img);
