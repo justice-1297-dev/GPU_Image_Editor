@@ -412,17 +412,17 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 }
 
-unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels) {
+// unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels) {
     
-    unsigned char *img = stbi_load(fileName.c_str(), &width, &height, &channels, 4);
-    channels = 4;
-    if(img == NULL) {
-        printf("Error in loading the image\n");
-        exit(1);
-    }
-    printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+//     unsigned char *img = stbi_load(fileName.c_str(), &width, &height, &channels, 4);
+//     channels = 4;
+//     if(img == NULL) {
+//         printf("Error in loading the image\n");
+//         exit(1);
+//     }
+//     printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
-    return img;
-}
+//     return img;
+// }
 
 }
