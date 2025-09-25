@@ -5,6 +5,8 @@
 #include "ShaderProgram.h"
 #include "Window.h"
 
+#include "App.h"
+
 #include <iostream>
 
 // Include glad and glfw for graphics and windowing

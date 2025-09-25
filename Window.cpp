@@ -46,7 +46,7 @@ void Window::pollEvents() {
     glfwPollEvents();
 }
 
-void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+void Window::cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
 // -------------------------------------
 // Get the applicaiton
@@ -86,7 +86,7 @@ if (app.drawing) {
 
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+void Window::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 // -------------------------------------
 // Set the window drawing area
@@ -108,7 +108,7 @@ float aspect = 1.0f*width/height;
 app.buttonHeight = 0.1*aspect;
 }
 
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+void Window::mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
 // -------------------------------------
 // handle button presses and drawing
 // -------------------------------------
