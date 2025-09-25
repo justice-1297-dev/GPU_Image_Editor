@@ -39,18 +39,18 @@ Image::~Image() {
     // stbi_image_free(buttonImg);
 }
 
-Image& Image::operator=(const Image& img) {
-    if (this != &other) {
-        width = other.width;
-        height = other.height;
-        channels = other.channels;
+// Image& Image::operator=(const Image& img) {
+//     if (this != &other) {
+//         width = other.width;
+//         height = other.height;
+//         channels = other.channels;
 
-        delete[] img;
-        img = new unsigned char[width * height * channels];
-        std::copy(other.img, other.img + width * height * channels, img);
-    }
-    return *this;
-}
+//         delete[] img;
+//         img = new unsigned char[width * height * channels];
+//         std::copy(other.img, other.img + width * height * channels, img);
+//     }
+//     return *this;
+// }
 
 
 int Image::getWidth() const {

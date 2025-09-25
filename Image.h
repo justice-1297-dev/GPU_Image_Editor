@@ -15,7 +15,7 @@ public:
     Image(int width, int height);
 
     // copy constructor
-    Image(const Image& img);
+    // Image(const Image& img);
 
     // Destructor
     ~Image();
