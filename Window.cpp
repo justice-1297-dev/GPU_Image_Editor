@@ -35,4 +35,8 @@ Window::~Window(){}
 void Window::set(){
     glViewport(0, 0, width, height);
 }
+
+void Window::getWindow(){
+    return window;
+}
 }

@@ -85,7 +85,7 @@ int Application::run() {
     // -------------------------------------
     // Set the application and the window height and width
     // -------------------------------------
-    glfwSetWindowUserPointer(appWindow, &app);
+    glfwSetWindowUserPointer(appWindow.getWindow(), &app);
     // app.windowWidth = width;
     // app.windowHeight = height;
 
