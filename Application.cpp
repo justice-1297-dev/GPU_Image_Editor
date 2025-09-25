@@ -161,7 +161,7 @@ int Application::run() {
     // Create Textured Rectangle (For drawing images to the screen)
     // -------------------------------------
 
-    TextureRectangle texRec();
+    TextureRectangle texRec;
     // float vertices[] = {
     //      1.0f,  1.0f, 0.0f,  // top right
     //      1.0f, -1.0f, 0.0f,  // bottom right
@@ -268,7 +268,7 @@ int Application::run() {
             // Draw the Texture Rectangle defined above
             // -------------------------------------
             // 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, false
-            texRec.draw(shader);
+            texRec.draw(shader.getShaderProgram());
             // int scaleLoc = glGetUniformLocation(shaderProgram, "scale");
             // int offsetLoc = glGetUniformLocation(shaderProgram, "offset");
             // int highlightLoc = glGetUniformLocation(shaderProgram, "highlight");
@@ -281,7 +281,7 @@ int Application::run() {
             // -------------------------------------
             // Use the button texture defined above
             // -------------------------------------
-            buttonTexture.use(shader);
+            buttonTexture.use(shader.getShaderProgram());
 
             // -------------------------------------
             // Draw button using the Texture Rectangle defined above
