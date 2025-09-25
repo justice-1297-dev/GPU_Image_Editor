@@ -211,7 +211,7 @@ int Application::run() {
     // -------------------------------------
     // Create button
     // -------------------------------------
-    float aspect = 1.0f*width/height;
+    float aspect = 1.0f*app.windowWidth/app.windowHeight;
     app.buttonX = 0.01;
     app.buttonY = 0.01;
     app.buttonWidth = 0.1;

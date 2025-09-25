@@ -1,9 +1,5 @@
 #include "Window.h"
 
-// Include glad and glfw for graphics and windowing
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
 namespace csci3081{
 
 Window::Window(int windowWidth, int windowHeight){
