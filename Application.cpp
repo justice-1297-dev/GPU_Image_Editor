@@ -161,7 +161,7 @@ int Application::run() {
     // Create Textured Rectangle (For drawing images to the screen)
     // -------------------------------------
 
-    TextureRectangle texRec;
+    TextureRectangle texRec(width, height, img);
     // float vertices[] = {
     //      1.0f,  1.0f, 0.0f,  // top right
     //      1.0f, -1.0f, 0.0f,  // bottom right
@@ -268,7 +268,7 @@ int Application::run() {
             // Draw the Texture Rectangle defined above
             // -------------------------------------
             // 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, false
-            TextureRectangle texRec.draw();
+            texRec.draw(shader);
             // int scaleLoc = glGetUniformLocation(shaderProgram, "scale");
             // int offsetLoc = glGetUniformLocation(shaderProgram, "offset");
             // int highlightLoc = glGetUniformLocation(shaderProgram, "highlight");
@@ -281,7 +281,7 @@ int Application::run() {
             // -------------------------------------
             // Use the button texture defined above
             // -------------------------------------
-            buttonTexture.use(shaderProgram);
+            buttonTexture.use(shader);
 
             // -------------------------------------
             // Draw button using the Texture Rectangle defined above
@@ -312,20 +312,20 @@ int Application::run() {
     // -------------------------------------
     // Destroy Textured Rectangle
     // -------------------------------------
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
+    // glDeleteVertexArrays(1, &VAO);
+    // glDeleteBuffers(1, &VBO);
+    // glDeleteBuffers(1, &EBO);
 
     // -------------------------------------
     // Destroy Shader Program
     // -------------------------------------
-    glDeleteProgram(shaderProgram);
+    // glDeleteProgram(shaderProgram);
 
     // -------------------------------------
     // Destroy Images
     // -------------------------------------
-    stbi_image_free(img);
-    stbi_image_free(buttonImg);
+    // stbi_image_free(img);
+    // stbi_image_free(buttonImg);
     
     // -------------------------------------
     // Terminate windowing application

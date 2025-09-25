@@ -44,6 +44,11 @@ TextureRectangle::TextureRectangle(int width, int height, unsigned char* img){
     glBindBuffer(GL_ARRAY_BUFFER, 0); 
     glBindVertexArray(0); 
 }
+TextureRectangle::~TextureRectangle(){
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
+}
 // unsigned int shaderProgram
 void TextureRectangle::draw(unsigned int shaderProgram){
     int scaleLoc = glGetUniformLocation(shaderProgram, "scale");

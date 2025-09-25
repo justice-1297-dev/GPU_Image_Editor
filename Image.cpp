@@ -34,7 +34,9 @@ Image::Image(const Image& img){
 }
 
 Image::~Image() {
-    delete[] img;
+    // delete[] img;
+    stbi_image_free(img);
+    stbi_image_free(buttonImg);
 }
 
 Image& Image::operator=(const Image& img) {
