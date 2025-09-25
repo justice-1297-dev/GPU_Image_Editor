@@ -6,8 +6,7 @@
 
 namespace csci3081{
 
-Texture::Texture(){}
-Texture::Texture(){
+Texture::Texture(int width, int height, unsigned char* img){
     glGenTextures(1, &texture);  
     glBindTexture(GL_TEXTURE_2D, texture);  
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
