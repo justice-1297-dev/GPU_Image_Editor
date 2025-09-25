@@ -214,15 +214,8 @@ int Application::run() {
     // -------------------------------------
     // Create Button Texture with buttonImageWidth, buttonImgHeight and buttonImg data
     // -------------------------------------
-    unsigned int buttonTexture;
-    glGenTextures(1, &buttonTexture);  
-    glBindTexture(GL_TEXTURE_2D, buttonTexture);  
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, buttonImgWidth, buttonImgHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, buttonImg);
-    glGenerateMipmap(GL_TEXTURE_2D);
+    Texture buttonTexture(buttonImgWidth, buttonImgHeight, buttonImg);
+    
 
     // -------------------------------------
     // Set the window drawing area
@@ -279,10 +272,7 @@ int Application::run() {
             // -------------------------------------
             // Use the button texture defined above
             // -------------------------------------
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, buttonTexture);
-            int buttonTexLoc = glGetUniformLocation(shaderProgram, "tex");
-            glUniform1i(buttonTexLoc, 0);
+            buttonTexture.use(shaderProgram);
 
             // -------------------------------------
             // Draw button using the Texture Rectangle defined above
