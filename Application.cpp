@@ -43,7 +43,7 @@ int Application::run() {
     // -------------------------------------
     //  Load background image
     // -------------------------------------
-    int width, height, channels;
+    // int width, height, channels;
     // unsigned char *img = load_image("img_small.jpeg", width, height, channels);
     // app.imgWidth = width;
     // app.imgHeight = height;
@@ -161,7 +161,7 @@ int Application::run() {
     // Create Textured Rectangle (For drawing images to the screen)
     // -------------------------------------
 
-    TextureRectangle texRec(width, height, img);
+    TextureRectangle texRec;
     // float vertices[] = {
     //      1.0f,  1.0f, 0.0f,  // top right
     //      1.0f, -1.0f, 0.0f,  // bottom right
