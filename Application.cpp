@@ -3,6 +3,7 @@
 #include "Image.h"
 #include "TextureRectangle.h"
 #include "ShaderProgram.h"
+#include "Window.h"
 
 #include <iostream>
 
@@ -58,26 +59,27 @@ int Application::run() {
     // -------------------------------------
     // Create window of height and width.  Initialize input callbacks
     // -------------------------------------
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    GLFWwindow* window = glfwCreateWindow(width, height, "Image Editor", NULL, NULL);
-    if (window == NULL)
-    {
-        std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    glfwSetCursorPosCallback(window, cursor_position_callback);
-    glfwSetMouseButtonCallback(window, mouse_button_callback);
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        return -1;
+    Window window(windowWidth, windowHeight);
+    // glfwInit();
+    // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    // glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    // GLFWwindow* window = glfwCreateWindow(width, height, "Image Editor", NULL, NULL);
+    // if (window == NULL)
+    // {
+    //     std::cout << "Failed to create GLFW window" << std::endl;
+    //     glfwTerminate();
+    //     return -1;
+    // }
+    // glfwMakeContextCurrent(window);
+    // glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    // glfwSetCursorPosCallback(window, cursor_position_callback);
+    // glfwSetMouseButtonCallback(window, mouse_button_callback);
+    // if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    // {
+    //     std::cout << "Failed to initialize GLAD" << std::endl;
+    //     return -1;
     }
 
     // -------------------------------------
@@ -286,7 +288,7 @@ int Application::run() {
             // -------------------------------------
             // Draw button using the Texture Rectangle defined above
             // -------------------------------------
-            TextureRectangle texRec.draw(app.buttonWidth, app.buttonHeight, 1.0f, app.buttonX*2.0-1.0 + app.buttonWidth, 1.0 - app.buttonHeight - app.buttonY*2.0, 0.0f, app.buttonHighlighted && !app.buttonClicked);
+            texRec.draw(app.buttonWidth, app.buttonHeight, 1.0f, app.buttonX*2.0-1.0 + app.buttonWidth, 1.0 - app.buttonHeight - app.buttonY*2.0, 0.0f, app.buttonHighlighted && !app.buttonClicked);
             // int buttonScaleLoc = glGetUniformLocation(shaderProgram, "scale");
             // int buttonOffsetLoc = glGetUniformLocation(shaderProgram, "offset");
             // int buttonHighlightLoc = glGetUniformLocation(shaderProgram, "highlight");
