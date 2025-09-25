@@ -16,6 +16,9 @@ Texture::Texture(int width, int height, unsigned char* img){
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img);
     glGenerateMipmap(GL_TEXTURE_2D);
 }
+
+Texture::~Texture(){}
+
 void Texture::use(unsigned int shaderProgram){
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);

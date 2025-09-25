@@ -285,14 +285,15 @@ int Application::run() {
             // -------------------------------------
             // Draw button using the Texture Rectangle defined above
             // -------------------------------------
-            int buttonScaleLoc = glGetUniformLocation(shaderProgram, "scale");
-            int buttonOffsetLoc = glGetUniformLocation(shaderProgram, "offset");
-            int buttonHighlightLoc = glGetUniformLocation(shaderProgram, "highlight");
-            glUniform3f(buttonScaleLoc, app.buttonWidth, app.buttonHeight, 1.0f);
-            glUniform3f(buttonOffsetLoc, app.buttonX*2.0-1.0 + app.buttonWidth, 1.0 - app.buttonHeight - app.buttonY*2.0, 0.0f);
-            glUniform1i(buttonHighlightLoc, app.buttonHighlighted && !app.buttonClicked);
-            glBindVertexArray(VAO);
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+            TextureRectangle texRec.draw(app.buttonWidth, app.buttonHeight, 1.0f, app.buttonX*2.0-1.0 + app.buttonWidth, 1.0 - app.buttonHeight - app.buttonY*2.0, 0.0f, app.buttonHighlighted && !app.buttonClicked);
+            // int buttonScaleLoc = glGetUniformLocation(shaderProgram, "scale");
+            // int buttonOffsetLoc = glGetUniformLocation(shaderProgram, "offset");
+            // int buttonHighlightLoc = glGetUniformLocation(shaderProgram, "highlight");
+            // glUniform3f(buttonScaleLoc, app.buttonWidth, app.buttonHeight, 1.0f);
+            // glUniform3f(buttonOffsetLoc, app.buttonX*2.0-1.0 + app.buttonWidth, 1.0 - app.buttonHeight - app.buttonY*2.0, 0.0f);
+            // glUniform1i(buttonHighlightLoc, app.buttonHighlighted && !app.buttonClicked);
+            // glBindVertexArray(VAO);
+            // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         }
 
