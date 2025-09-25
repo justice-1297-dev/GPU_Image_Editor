@@ -7,7 +7,8 @@ class TextureRectangle {
 public:
     TextureRectangle(float vertices[], float coords[], unsigned int indices[]);
     ~TextureRectangle();
-    void draw(unsigned int shaderProgram);
+    // unsigned int shaderProgram
+    void draw();
 private:
     unsigned int VBO, VAO, EBO;
 };
