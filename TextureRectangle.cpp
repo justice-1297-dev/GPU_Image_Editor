@@ -6,7 +6,7 @@
 
 namespace csci3081{
 
-TextureRectangle::TextureRectangle(int width, int height, unsigned char* img){
+TextureRectangle::TextureRectangle(){
     float vertices[] = {
          1.0f,  1.0f, 0.0f,  // top right
          1.0f, -1.0f, 0.0f,  // bottom right

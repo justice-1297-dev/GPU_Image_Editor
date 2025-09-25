@@ -5,7 +5,8 @@ namespace csci3081{
 
 class TextureRectangle {
 public:
-    TextureRectangle(int width, int height, unsigned char* img);
+    TextureRectangle();
+    // int width, int height, unsigned char* img
     ~TextureRectangle();
     void draw(unsigned int shaderProgram);
 private:
