@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Color.h"
+#include "Application.h"
 
 namespace csci3081 {
 
@@ -28,7 +29,7 @@ public:
     int getHeight() const;
     Color getPixel(int x, int y) const;
     void setPixel(int x, int y, const Color& color);
-    const unsigned char* getData() { return pixels; }
+    const unsigned char* getData() { return img; }
 
 private:
     // int width;
