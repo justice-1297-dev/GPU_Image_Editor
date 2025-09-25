@@ -241,12 +241,12 @@ int Application::run() {
         // -------------------------------------
         // If the escape key is pressed, close the window
         if(glfwGetKey(appWindow.getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
-            glfwSetWindowShouldClose(window, true);
+            glfwSetWindowShouldClose(appWindow.getWindow(), true);
 
         // -------------------------------------
         // Copy background image data to the texture
         // -------------------------------------
-        backgroundTexture.copyToGPU(app.width, app.height, app.img);
+        backgroundTexture.copyToGPU(app.imgWidth, app.imgHeight, app.img);
 
         // -------------------------------------
         // Render Graphics
