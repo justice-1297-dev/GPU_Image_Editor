@@ -19,20 +19,20 @@
 
 namespace csci3081{
 // Holds all the application specific variables
-struct App {
-    int windowWidth;
-    int windowHeight;
-    float buttonWidth;
-    float buttonHeight;
-    float buttonX;
-    float buttonY;
-    bool buttonHighlighted;
-    bool buttonClicked;
-    bool drawing = false;
-    int imgWidth;
-    int imgHeight;
-    unsigned char* img;
-} app;
+// struct App {
+//     int windowWidth;
+//     int windowHeight;
+//     float buttonWidth;
+//     float buttonHeight;
+//     float buttonX;
+//     float buttonY;
+//     bool buttonHighlighted;
+//     bool buttonClicked;
+//     bool drawing = false;
+//     int imgWidth;
+//     int imgHeight;
+//     unsigned char* img;
+// } app;
 
 // Prototypes for user interaction
 unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels);
