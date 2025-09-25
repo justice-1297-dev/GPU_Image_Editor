@@ -45,7 +45,7 @@ TextureRectangle::TextureRectangle(int width, int height, unsigned char* img){
     glBindVertexArray(0); 
 }
 // unsigned int shaderProgram
-void TextureRectangle::draw(){
+void TextureRectangle::draw(unsigned int shaderProgram){
     int scaleLoc = glGetUniformLocation(shaderProgram, "scale");
     int offsetLoc = glGetUniformLocation(shaderProgram, "offset");
     int highlightLoc = glGetUniformLocation(shaderProgram, "highlight");
