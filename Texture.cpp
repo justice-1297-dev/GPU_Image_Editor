@@ -25,6 +25,10 @@ public:
         glUniform1i(texLoc, 0);
     }
 
+    void Texture::copyToGPU(int width, int height, unsigned char* img){
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img);
+    }
 private:
 };
 

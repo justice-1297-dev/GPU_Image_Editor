@@ -244,8 +244,7 @@ int Application::run() {
         // -------------------------------------
         // Copy background image data to the texture
         // -------------------------------------
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img);
+        backgroundTexture.copyToGPU(width, height, img);
 
         // -------------------------------------
         // Render Graphics
@@ -263,10 +262,7 @@ int Application::run() {
             // -------------------------------------
             // Use the texture defined above
             // -------------------------------------
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, texture);
-            int texLoc = glGetUniformLocation(shaderProgram, "tex");
-            glUniform1i(texLoc, 0);
+            backgroundTexture.use(shaderProgram);
 
             // -------------------------------------
             // Draw the Texture Rectangle defined above
