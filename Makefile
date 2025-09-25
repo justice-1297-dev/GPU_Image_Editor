@@ -13,7 +13,7 @@ build/Texture.o: Texture.cpp Texture.h
 	mkdir -p build
 	g++ -I. -Ilib -c Texture.cpp -o build/Texture.o
 
-build/Image.o: Image.cpp Image.h
+ㅡㅁ: Image.cpp Image.h
 	mkdir -p build
 	g++ -I. -Ilib -c Image.cpp -o build/Image.o
 

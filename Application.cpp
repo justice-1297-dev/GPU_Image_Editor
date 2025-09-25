@@ -42,7 +42,7 @@ int Application::run() {
     // -------------------------------------
     //  Load background image
     // -------------------------------------
-    // int width, height, channels;
+    int width, height, channels;
     // unsigned char *img = load_image("img_small.jpeg", width, height, channels);
     // app.imgWidth = width;
     // app.imgHeight = height;
