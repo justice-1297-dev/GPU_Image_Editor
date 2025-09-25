@@ -6,9 +6,7 @@
 
 namespace csci3081{
 
-class Texture {
-public:
-    Texture::Texture(){
+Texture::Texture(){
         glGenTextures(1, &texture);  
         glBindTexture(GL_TEXTURE_2D, texture);  
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
@@ -29,7 +27,5 @@ public:
         glBindTexture(GL_TEXTURE_2D, texture);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img);
     }
-private:
-};
 
 }
