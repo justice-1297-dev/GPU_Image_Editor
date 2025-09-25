@@ -36,10 +36,20 @@ Image::Image(const Image& img){
 Image::~Image() {
     // delete[] img;
     stbi_image_free(img);
-    stbi_image_free(buttonImg);
+    // stbi_image_free(buttonImg);
 }
 
 Image& Image::operator=(const Image& img) {
+    if (this != &other) {
+        width = other.width;
+        height = other.height;
+        channels = other.channels;
+
+        delete[] img;
+        img = new unsigned char[width * height * channels];
+        std::copy(other.img, other.img + width * height * channels, img);
+    }
+    return *this;
 }
 
 
@@ -68,7 +78,7 @@ void Image::saveAs(const std::string& filename) const {
     stbi_write_png(filename.c_str(), width, height, channels, img, width*channels);
 }
 
-void Image::load_image(const std::string& fileName, int& width, int& height, int& channels){
+unsigned char* Image::load_image(const std::string& fileName, int& width, int& height, int& channels){
     unsigned char *img = stbi_load(fileName.c_str(), &width, &height, &channels, 4);
     channels = 4;
     if(img == NULL) {
