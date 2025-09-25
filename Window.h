@@ -16,6 +16,10 @@ public:
     void pollEvents();
     bool shouldClose() const;
 
+    static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+    static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+    static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+
 private:
     int width;
     int height;
