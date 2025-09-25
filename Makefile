@@ -16,6 +16,5 @@ build/Texture.o: Texture.cpp Texture.h
 build/glad.o: lib/glad/glad.c 
 	mkdir -p build
 	g++ -I. -Ilib -c lib/glad/glad.c -o build/glad.o
-
 clean:
 	rm -rf build
