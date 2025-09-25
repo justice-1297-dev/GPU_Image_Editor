@@ -32,5 +32,7 @@ Window::Window(int windowWidth, int windowHeight){
 
 Window::~Window(){}
 
-
+void Window::set(){
+    glViewport(0, 0, width, height);
+}
 }

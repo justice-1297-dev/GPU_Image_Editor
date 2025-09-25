@@ -7,6 +7,7 @@ class Window {
 public:
     Window(int windowWidth, int windowHeight);
     ~Window();
+    void set();
 
 private:
 
