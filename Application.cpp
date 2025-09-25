@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "Texture.h"
+#include "Image.h"
 
 #include <iostream>
 
