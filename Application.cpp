@@ -228,12 +228,13 @@ int Application::run() {
     // -------------------------------------
     // Set the window drawing area
     // -------------------------------------
-    glViewport(0, 0, width, height);
+    appWindow.set;
+    // glViewport(0, 0, width, height);
 
     // -------------------------------------
     // Loop until the window should close
     // -------------------------------------
-    while(!glfwWindowShouldClose(window))
+    while(!glfwWindowShouldClose(appWindow))
     {
         // -------------------------------------
         // Process window input (e.g. mouse movement, clicks, resize, etc...)
