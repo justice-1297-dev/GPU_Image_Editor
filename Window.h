@@ -1,12 +1,14 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 namespace csci3081{
 
 class Window {
 public:
-    Window(int windowWidth, int windowHeight);
+    Window(int width, int height);
     ~Window();
     void set();
     GLFWwindow* getWindow();
