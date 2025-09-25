@@ -5,6 +5,7 @@ namespace csci3081{
 
 class TextureRectangle {
 public:
+    TextureRectangle();
     TextureRectangle(float vertices[], float coords[], unsigned int indices[]);
     ~TextureRectangle();
     void draw(unsigned int shaderProgram);
