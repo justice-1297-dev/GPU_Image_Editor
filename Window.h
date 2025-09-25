@@ -12,6 +12,9 @@ public:
     ~Window();
     void set();
     GLFWwindow* getWindow();
+    void swapBuffers();
+    void pollEvents();
+    bool shouldClose() const;
 
 private:
     int width;

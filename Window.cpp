@@ -35,4 +35,13 @@ void Window::set(){
 void Window::getWindow(){
     return window;
 }
+
+void Window::swapBuffers() {
+    glfwSwapBuffers(window);
+}
+
+void Window::pollEvents() {
+    glfwPollEvents();
+}
+
 }

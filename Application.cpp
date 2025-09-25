@@ -228,25 +228,25 @@ int Application::run() {
     // -------------------------------------
     // Set the window drawing area
     // -------------------------------------
-    appWindow.set;
+    appWindow.set();
     // glViewport(0, 0, width, height);
 
     // -------------------------------------
     // Loop until the window should close
     // -------------------------------------
-    while(!glfwWindowShouldClose(appWindow))
+    while(!glfwWindowShouldClose(appWindow.getWindow()))
     {
         // -------------------------------------
         // Process window input (e.g. mouse movement, clicks, resize, etc...)
         // -------------------------------------
         // If the escape key is pressed, close the window
-        if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        if(glfwGetKey(appWindow.getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
             glfwSetWindowShouldClose(window, true);
 
         // -------------------------------------
         // Copy background image data to the texture
         // -------------------------------------
-        backgroundTexture.copyToGPU(width, height, app.img);
+        backgroundTexture.copyToGPU(app.width, app.height, app.img);
 
         // -------------------------------------
         // Render Graphics
@@ -289,7 +289,7 @@ int Application::run() {
             // -------------------------------------
             // Draw button using the Texture Rectangle defined above
             // -------------------------------------
-            texRec.draw(app.buttonWidth, app.buttonHeight, 1.0f, app.buttonX*2.0-1.0 + app.buttonWidth, 1.0 - app.buttonHeight - app.buttonY*2.0, 0.0f, app.buttonHighlighted && !app.buttonClicked);
+            texRec.draw(shader.getShaderProgram());
             // int buttonScaleLoc = glGetUniformLocation(shaderProgram, "scale");
             // int buttonOffsetLoc = glGetUniformLocation(shaderProgram, "offset");
             // int buttonHighlightLoc = glGetUniformLocation(shaderProgram, "highlight");
@@ -304,12 +304,12 @@ int Application::run() {
         // -------------------------------------
         // Show window on the screen
         // -------------------------------------
-        glfwSwapBuffers(window);
+        appWindow.swapBuffers();
 
         // -------------------------------------
         // Check for user input (mouse movement, clicks, keyboard, etc...)
         // -------------------------------------
-        glfwPollEvents();
+        appWindow.pollEvents();
     }
 
     // -------------------------------------
