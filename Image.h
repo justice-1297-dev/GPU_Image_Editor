@@ -15,7 +15,7 @@ public:
     Image(int width, int height);
 
     // copy constructor
-    // Image(const Image& img);
+    Image(const Image& img);
 
     // Destructor
     ~Image();
@@ -29,8 +29,8 @@ public:
     int getHeight() const;
     Color getPixel(int x, int y) const;
     void setPixel(int x, int y, const Color& color);
-    unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels) { return img; }
-
+    unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels);
+    
 private:
     // int width;
     // int height;
