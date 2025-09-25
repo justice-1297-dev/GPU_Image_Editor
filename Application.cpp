@@ -267,7 +267,7 @@ int Application::run() {
             // Draw the Texture Rectangle defined above
             // -------------------------------------
             // 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, false
-            texRec.draw();
+            TextureRectangle texRec.draw();
             // int scaleLoc = glGetUniformLocation(shaderProgram, "scale");
             // int offsetLoc = glGetUniformLocation(shaderProgram, "offset");
             // int highlightLoc = glGetUniformLocation(shaderProgram, "highlight");
