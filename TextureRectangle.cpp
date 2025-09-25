@@ -7,22 +7,22 @@
 namespace csci3081{
 
 TextureRectangle::TextureRectangle(float vertices[], float coords[], unsigned int indices[]){
-    float vertices[] = {
-         1.0f,  1.0f, 0.0f,  // top right
-         1.0f, -1.0f, 0.0f,  // bottom right
-        -1.0f, -1.0f, 0.0f,  // bottom left
-        -1.0f,  1.0f, 0.0f   // top left 
-    };
-    float coords[] = {
-         1.0f,  0.0f,  // top right
-         1.0f, 1.0f,  // bottom right
-        0.0f, 1.0f,  // bottom left
-        0.0f,  0.0f   // top left 
-    };
-    unsigned int indices[] = {  // note that we start from 0!
-        0, 1, 3,  // first Triangle
-        1, 2, 3   // second Triangle
-    };
+    // float vertices[] = {
+    //      1.0f,  1.0f, 0.0f,  // top right
+    //      1.0f, -1.0f, 0.0f,  // bottom right
+    //     -1.0f, -1.0f, 0.0f,  // bottom left
+    //     -1.0f,  1.0f, 0.0f   // top left 
+    // };
+    // float coords[] = {
+    //      1.0f,  0.0f,  // top right
+    //      1.0f, 1.0f,  // bottom right
+    //     0.0f, 1.0f,  // bottom left
+    //     0.0f,  0.0f   // top left 
+    // };
+    // unsigned int indices[] = {  // note that we start from 0!
+    //     0, 1, 3,  // first Triangle
+    //     1, 2, 3   // second Triangle
+    // };
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
