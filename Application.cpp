@@ -35,10 +35,10 @@ namespace csci3081{
 // } app;
 
 // Prototypes for user interaction
-unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels);
-void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+// unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels);
+// void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+// void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+// void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 Application::Application(){}
 
