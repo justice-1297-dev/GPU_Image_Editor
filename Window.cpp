@@ -1,4 +1,5 @@
 #include "Window.h"
+#include <iostream>
 
 namespace csci3081{
 
@@ -13,16 +14,32 @@ Window::Window(int width, int height){
     {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
-        return -1;
+        // return -1;
     }
+
+    void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+        glViewport(0, 0, width, height);
+    }
+
+    void cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
+
+    }
+
+    void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+
+}
+
     glfwMakeContextCurrent(window);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    // glfwSetCursorPosCallback(window, cursor_position_callback);
+    // glfwSetMouseButtonCallback(window, mouse_button_callback);
+    // if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
-        return -1;
+        // return -1;
     }
 }
 
@@ -32,7 +49,7 @@ void Window::set(){
     glViewport(0, 0, width, height);
 }
 
-void Window::getWindow(){
+void Window::getWindow() const{
     return window;
 }
 

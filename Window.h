@@ -11,7 +11,7 @@ public:
     Window(int width, int height);
     ~Window();
     void set();
-    GLFWwindow* getWindow();
+    GLFWwindow* getWindow() const;
     void swapBuffers();
     void pollEvents();
     bool shouldClose() const;
