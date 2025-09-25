@@ -243,7 +243,7 @@ int Application::run() {
         // -------------------------------------
         // Copy background image data to the texture
         // -------------------------------------
-        backgroundTexture.copyToGPU(width, height, img);
+        backgroundTexture.copyToGPU(width, height, app.img);
 
         // -------------------------------------
         // Render Graphics
