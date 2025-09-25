@@ -59,7 +59,7 @@ int Application::run() {
     // -------------------------------------
     // Create window of height and width.  Initialize input callbacks
     // -------------------------------------
-    Window window(windowWidth, windowHeight);
+    Window window(app.windowWidth, app.windowHeight);
     // glfwInit();
     // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -80,7 +80,7 @@ int Application::run() {
     // {
     //     std::cout << "Failed to initialize GLAD" << std::endl;
     //     return -1;
-    }
+    // }
 
     // -------------------------------------
     // Set the application and the window height and width

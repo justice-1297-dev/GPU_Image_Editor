@@ -39,9 +39,9 @@ private:
     
     int width, height, channels;
     unsigned char *img = load_image("img_small.jpeg", width, height, channels);
-    // app.imgWidth = width;
-    // app.imgHeight = height;
-    // app.img = img;
+    app.imgWidth = width;
+    app.imgHeight = height;
+    app.img = img;
 };
 
 }
