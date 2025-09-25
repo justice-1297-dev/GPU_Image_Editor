@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include "Image.h"
 #include "TextureRectangle.h"
+#include "ShaderProgram.h"
 
 #include <iostream>
 
@@ -89,7 +90,7 @@ int Application::run() {
     // -------------------------------------
     // Create Shader Program (Renders Image)
     // -------------------------------------
-    ShaderProgram shader;
+    ShaderProgram shader();
     // const char *vertexShaderSource = "#version 330 core\n"
     // "layout (location = 0) in vec3 aPos;\n"
     // "layout (location = 1) in vec2 coord;\n"
