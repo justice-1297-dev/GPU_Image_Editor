@@ -59,7 +59,7 @@ int Application::run() {
     // -------------------------------------
     // Create window of height and width.  Initialize input callbacks
     // -------------------------------------
-    Window window(app.windowWidth, app.windowHeight);
+    Window appWindow(app.windowWidth, app.windowHeight);
     // glfwInit();
     // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -85,9 +85,9 @@ int Application::run() {
     // -------------------------------------
     // Set the application and the window height and width
     // -------------------------------------
-    glfwSetWindowUserPointer(window, &app);
-    app.windowWidth = width;
-    app.windowHeight = height;
+    glfwSetWindowUserPointer(appWindow, &app);
+    // app.windowWidth = width;
+    // app.windowHeight = height;
 
     // -------------------------------------
     // Create Shader Program (Renders Image)
