@@ -204,8 +204,8 @@ int Application::run() {
     // Create Background Texture with width and height and img data (Texture Constructor)
     // -------------------------------------
     
-    Texture backgroundTexture(width, height, img);
-
+    Texture backgroundTexture(app.imgWidth, app.imgHeight, app.img);
+    
     // -------------------------------------
     // Create button
     // -------------------------------------
