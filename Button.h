@@ -20,7 +20,7 @@ public:
     void draw();
 
 private:
-    int buttonImgWidth, buttonImgHeight, buttonImgChannels;
+    float buttonImgWidth, buttonImgHeight, buttonImgChannels;
     float buttonX, buttonY,  buttonWidth, buttonHeight;
     bool buttonHighlighted, buttonClicked;
     unsigned char *buttonImg;
