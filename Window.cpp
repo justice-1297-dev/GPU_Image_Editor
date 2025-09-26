@@ -1,6 +1,8 @@
 #include "Window.h"
 #include "Application.h"
 #include <iostream>
+
+#include <stb_image.h>
 namespace csci3081{
 
 Window::Window(int width, int height){
