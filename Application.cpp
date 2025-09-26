@@ -58,7 +58,7 @@ int Application::run() {
     // -------------------------------------
     // Button button;
     Image buttonImage;
-    buttonImage.load_image("reset.png",app.buttonWidth, app.buttonHeight, app.buttonChannels);
+    buttonImage.load_image("reset.png",app.buttonWidth, app.buttonHeight, button.getImg());
     Texture buttonTexture(app.imgWidth, app.imgHeight, app.img);
     // int buttonImgWidth, buttonImgHeight, buttonImgChannels;
     // unsigned char *buttonImg = load_image("reset.png", buttonImgWidth, buttonImgHeight, buttonImgChannels);
@@ -233,7 +233,7 @@ int Application::run() {
     // -------------------------------------
     // Create Button Texture with buttonImageWidth, buttonImgHeight and buttonImg data
     // -------------------------------------
-    Texture buttonTexture(buttonImgWidth, buttonImgHeight, buttonImg);
+    Texture buttonTexture(buttonWidth, buttonHeight, button.getImg());
     
 
     // -------------------------------------
