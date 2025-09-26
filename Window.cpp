@@ -18,14 +18,14 @@ Window::Window(int width, int height){
     }
 
     glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    glfwSetCursorPosCallback(window, cursor_position_callback);
-    glfwSetMouseButtonCallback(window, mouse_button_callback);
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        // return -1;
-    }
+    // glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    // glfwSetCursorPosCallback(window, cursor_position_callback);
+    // glfwSetMouseButtonCallback(window, mouse_button_callback);
+    // if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    // {
+    //     std::cout << "Failed to initialize GLAD" << std::endl;
+    //     // return -1;
+    // }
 }
 
 Window::~Window(){}
