@@ -85,7 +85,7 @@ unsigned char* Image::load_image(const std::string& fileName, int& width, int& h
         printf("Error in loading the image\n");
         exit(1);
     }
-    printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+    // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
     return img;
 }
