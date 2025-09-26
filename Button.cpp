@@ -11,11 +11,7 @@
 #include <iostream>
 namespace csci3081 {
 
-Button::Button()
-    : buttonImgWidth(0), buttonImgHeight(0), buttonImgChannels(0), buttonImg(nullptr),
-    buttonX(0.01f), buttonY(0.01f), buttonWidth(0.1f), buttonHeight(0.1f),
-    buttonHighlighted(false), buttonClicked(false) {}
-Button::Button(int buttonImgWidth, int buttonImgHeight){
+Button::Button(){
     float aspect = 1.0f*buttonImgWidth/buttonImgHeight;
     buttonX = 0.01;
     buttonY = 0.01;
@@ -24,6 +20,16 @@ Button::Button(int buttonImgWidth, int buttonImgHeight){
     buttonHighlighted = false;
     buttonClicked = false;
 }
+
+// Button::Button(int buttonImgWidth, int buttonImgHeight){
+//     float aspect = 1.0f*buttonImgWidth/buttonImgHeight;
+//     buttonX = 0.01;
+//     buttonY = 0.01;
+//     buttonWidth = 0.1;
+//     buttonHeight = 0.1*aspect;
+//     buttonHighlighted = false;
+//     buttonClicked = false;
+// }
 Button::~Button(){
 }
 

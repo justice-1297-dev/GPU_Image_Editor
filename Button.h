@@ -23,7 +23,7 @@ private:
     int buttonImgWidth, buttonImgHeight, buttonImgChannels;
     float buttonX, buttonY,  buttonWidth, buttonHeight;
     bool buttonHighlighted, buttonClicked;
-    unsigned char *buttonImg = load_button("reset.png", buttonImgWidth, buttonImgHeight, buttonImgChannels);
+    unsigned char *buttonImg;
 };
 
 }
