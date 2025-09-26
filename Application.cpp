@@ -58,7 +58,7 @@ int Application::run() {
     // -------------------------------------
     // Button button;
     Image buttonImage;
-    buttonImage.load_image("reset.png");
+    buttonImage.load_image("reset.png",app.buttonImgWidth, app.buttonImgHeight, app.buttonImgChannels);
     Texture buttonTexture(app.imgWidth, app.imgHeight, app.img);
     // int buttonImgWidth, buttonImgHeight, buttonImgChannels;
     // unsigned char *buttonImg = load_image("reset.png", buttonImgWidth, buttonImgHeight, buttonImgChannels);
@@ -220,7 +220,7 @@ int Application::run() {
     // Create button
     // -------------------------------------
     // Button button(buttonImgWidth, buttonImgHeigh);
-    Button button();
+    Button button;
 
     // float aspect = 1.0f*app.windowWidth/app.windowHeight;
     // app.buttonX = 0.01;
