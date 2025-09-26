@@ -9,10 +9,14 @@ namespace csci3081{
 class Button {
 public:
     Button();
-    Button(int buttonImgWidth, int buttonImgHeight);
+    // Button(int buttonImgWidth, int buttonImgHeight);
     ~Button();
 
+    void load_button(const std::string& filename);
     void load(const std::string& filename);
+    int getWidth() const { return buttonImgWidth; }
+    int getHeight() const { return buttonImgHeight; }
+    unsigned char* getImg() const { return buttonImg; }
     void draw();
 
 private:

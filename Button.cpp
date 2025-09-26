@@ -27,7 +27,7 @@ Button::Button(int buttonImgWidth, int buttonImgHeight){
 Button::~Button(){
 }
 
-void Button::load(const std::string& filename){
+void Button::load_button(const std::string& filename){
     buttonImg = stbi_load(filename.c_str(), &buttonImgWidth, &buttonImgHeight, &buttonImgChannels, 4);
     if (!buttonImg) {
         std::cerr << "Failed to load button image: " << filename << std::endl;

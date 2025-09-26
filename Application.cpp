@@ -57,7 +57,8 @@ int Application::run() {
     //  Load button image
     // -------------------------------------
     Button button;
-    button.load("reset.png");
+    button.load_button("reset.png");
+    Texture buttonTexture(button.getWidth(), button.getHeight(), button.getImg());
     // int buttonImgWidth, buttonImgHeight, buttonImgChannels;
     // unsigned char *buttonImg = load_image("reset.png", buttonImgWidth, buttonImgHeight, buttonImgChannels);
     
