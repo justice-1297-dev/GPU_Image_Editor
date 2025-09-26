@@ -14,7 +14,7 @@
 #include <GLFW/glfw3.h>
 
 // Include stb_image for image loading
-#define STB_IMAGE_IMPLEMENTATION
+// #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
 namespace csci3081{
