@@ -1,6 +1,6 @@
 #include "Window.h"
+#include "Application.h"
 #include <iostream>
-
 namespace csci3081{
 
 Window::Window(int width, int height){
@@ -51,7 +51,7 @@ void Window::cursor_position_callback(GLFWwindow* window, double xpos, double yp
 // -------------------------------------
 // Get the applicaiton
 // -------------------------------------
-App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
+    App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
 
 // -------------------------------------
 // If the mouse is over the button, highlight it
@@ -112,7 +112,6 @@ void Window::mouse_button_callback(GLFWwindow* window, int button, int action, i
 // -------------------------------------
 // handle button presses and drawing
 // -------------------------------------
-App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
 if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
     App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
     if (app.buttonHighlighted) {

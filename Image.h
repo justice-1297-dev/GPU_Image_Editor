@@ -21,7 +21,7 @@ public:
     ~Image();
 
     //assignement operator
-    Image& operator=(const Image& img); 
+    Image& operator=(const Image& img);
 
     // methods
     void saveAs(const std::string& filename) const;
@@ -30,7 +30,7 @@ public:
     Color getPixel(int x, int y) const;
     void setPixel(int x, int y, const Color& color);
     unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels);
-    
+
 private:
     // int width;
     // int height;
