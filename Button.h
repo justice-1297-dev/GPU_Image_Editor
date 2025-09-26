@@ -8,8 +8,8 @@ namespace csci3081{
 
 class Button {
 public:
-    Button();
-    // Button(int buttonImgWidth, int buttonImgHeight);
+    // Button();
+    Button(int buttonImgWidth, int buttonImgHeight);
     ~Button();
 
     void load_button(const std::string& filename);
