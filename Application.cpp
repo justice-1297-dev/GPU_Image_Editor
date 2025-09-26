@@ -56,7 +56,6 @@ int Application::run() {
     // -------------------------------------
     //  Load button image
     // -------------------------------------
-    Button button;
     button.load("reset.png");
     // int buttonImgWidth, buttonImgHeight, buttonImgChannels;
     // unsigned char *buttonImg = load_image("reset.png", buttonImgWidth, buttonImgHeight, buttonImgChannels);
@@ -217,7 +216,7 @@ int Application::run() {
     // -------------------------------------
     // Create button
     // -------------------------------------
-    Button button;
+    Button button(buttonImgWidth, buttonImgHeight);
 
     // float aspect = 1.0f*app.windowWidth/app.windowHeight;
     // app.buttonX = 0.01;
