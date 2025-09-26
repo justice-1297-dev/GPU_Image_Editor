@@ -6,7 +6,6 @@
 #include "Window.h"
 #include "Button.h"
 
-#include "App.h"
 
 #include <iostream>
 
