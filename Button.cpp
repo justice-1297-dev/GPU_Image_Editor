@@ -1,21 +1,33 @@
 #include "Button.h"
 #include "Application.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
+#define STBI_MSC_SECURE_CRT
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
+
+#include <iostream>
 namespace csci3081 {
 
-Button::Button(){
-    float aspect = 1.0f*app.windowWidth/app.windowHeight;
-    app.buttonX = 0.01;
-    app.buttonY = 0.01;
-    app.buttonWidth = 0.1;
-    app.buttonHeight = 0.1*aspect;
-    app.buttonHighlighted = false;
-    app.buttonClicked = false;
+Button::Button(int buttonImgWidth, int buttonImgHeight){
+    float aspect = 1.0f*buttonImgWidth/buttonImgHeight;
+    buttonX = 0.01;
+    buttonY = 0.01;
+    buttonWidth = 0.1;
+    buttonHeight = 0.1*aspect;
+    buttonHighlighted = false;
+    buttonClicked = false;
+}
+Button::~Button(){
 }
 
-Button::~Button(){
-
-
+void Button::load(const std::string& filename){
+    buttonImg = stbi_load(filename.c_str(), &buttonImgWidth, &buttonImgHeight, &buttonImgChannels, 4);
+    if (!buttonImg) {
+        std::cerr << "Failed to load button image: " << filename << std::endl;
+    }
 }
 
 }

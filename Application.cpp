@@ -56,8 +56,10 @@ int Application::run() {
     // -------------------------------------
     //  Load button image
     // -------------------------------------
-    int buttonImgWidth, buttonImgHeight, buttonImgChannels;
-    unsigned char *buttonImg = load_image("reset.png", buttonImgWidth, buttonImgHeight, buttonImgChannels);
+    Button button;
+    button.load("reset.png");
+    // int buttonImgWidth, buttonImgHeight, buttonImgChannels;
+    // unsigned char *buttonImg = load_image("reset.png", buttonImgWidth, buttonImgHeight, buttonImgChannels);
     
 
     // -------------------------------------
@@ -215,13 +217,15 @@ int Application::run() {
     // -------------------------------------
     // Create button
     // -------------------------------------
-    float aspect = 1.0f*app.windowWidth/app.windowHeight;
-    app.buttonX = 0.01;
-    app.buttonY = 0.01;
-    app.buttonWidth = 0.1;
-    app.buttonHeight = 0.1*aspect;
-    app.buttonHighlighted = false;
-    app.buttonClicked = false;
+    Button button;
+
+    // float aspect = 1.0f*app.windowWidth/app.windowHeight;
+    // app.buttonX = 0.01;
+    // app.buttonY = 0.01;
+    // app.buttonWidth = 0.1;
+    // app.buttonHeight = 0.1*aspect;
+    // app.buttonHighlighted = false;
+    // app.buttonClicked = false;
 
     // -------------------------------------
     // Create Button Texture with buttonImageWidth, buttonImgHeight and buttonImg data
