@@ -12,7 +12,7 @@ public:
     // Button(int buttonImgWidth, int buttonImgHeight);
     ~Button();
 
-    void load_button(const std::string& filename);
+    void load_button(const std::string& filename, float& width, float& height, float& channels);
     void load(const std::string& filename);
     int getWidth() const { return buttonImgWidth; }
     int getHeight() const { return buttonImgHeight; }
