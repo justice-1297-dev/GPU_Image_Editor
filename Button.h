@@ -12,7 +12,7 @@ public:
     // Button(int buttonImgWidth, int buttonImgHeight);
     ~Button();
 
-    void load_button(const std::string& filename, int& width, int& height, int& channels);
+    void load_button(const std::string& filename, float& width, float& height, float& channels);
     void load(const std::string& filename);
     int getWidth() const { return buttonImgWidth; }
     int getHeight() const { return buttonImgHeight; }
@@ -20,7 +20,7 @@ public:
     void draw();
 
 private:
-    float buttonImgWidth, buttonImgHeight, buttonImgChannels;
+    int buttonImgWidth, buttonImgHeight, buttonImgChannels;
     float buttonX, buttonY,  buttonWidth, buttonHeight;
     bool buttonHighlighted, buttonClicked;
     unsigned char *buttonImg;
