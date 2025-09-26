@@ -390,60 +390,60 @@ int Application::run() {
     
 // }
 
-// void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-// {
-//     // -------------------------------------
-//     // Set the window drawing area
-//     // -------------------------------------
-//     glViewport(0, 0, width, height);
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    // -------------------------------------
+    // Set the window drawing area
+    // -------------------------------------
+    glViewport(0, 0, width, height);
 
     
-//     // -------------------------------------
-//     // Get the applicaiton
-//     // -------------------------------------
-//     App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
-//     app.windowWidth = width;
-//     app.windowHeight = height;
+    // -------------------------------------
+    // Get the applicaiton
+    // -------------------------------------
+    App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
+    app.windowWidth = width;
+    app.windowHeight = height;
 
-//     // -------------------------------------
-//     // update the button height
-//     // -------------------------------------
-//     float aspect = 1.0f*width/height;
-//     app.buttonHeight = 0.1*aspect;
-// }
+    // -------------------------------------
+    // update the button height
+    // -------------------------------------
+    float aspect = 1.0f*width/height;
+    app.buttonHeight = 0.1*aspect;
+}
 
-// void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
-//     // -------------------------------------
-//     // handle button presses and drawing
-//     // -------------------------------------
-//     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-//         App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
-//         if (app.buttonHighlighted) {
-//             std::cout << "Clicked" << std::endl;
-//             app.buttonClicked = true;
-//         }
-//         else {
-//             app.drawing = true;
-//         }
-//     }
-//     if (action == GLFW_RELEASE) {
-//         app.buttonClicked = false;
-//         app.drawing = false;
-//     }
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+    // -------------------------------------
+    // handle button presses and drawing
+    // -------------------------------------
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+        App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
+        if (app.buttonHighlighted) {
+            std::cout << "Clicked" << std::endl;
+            app.buttonClicked = true;
+        }
+        else {
+            app.drawing = true;
+        }
+    }
+    if (action == GLFW_RELEASE) {
+        app.buttonClicked = false;
+        app.drawing = false;
+    }
 
-// }
+}
 
-// unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels) {
+unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels) {
     
-//     unsigned char *img = stbi_load(fileName.c_str(), &width, &height, &channels, 4);
-//     channels = 4;
-//     if(img == NULL) {
-//         printf("Error in loading the image\n");
-//         exit(1);
-//     }
-//     printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+    unsigned char *img = stbi_load(fileName.c_str(), &width, &height, &channels, 4);
+    channels = 4;
+    if(img == NULL) {
+        printf("Error in loading the image\n");
+        exit(1);
+    }
+    printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
-//     return img;
-// }
+    return img;
+}
 
 }
