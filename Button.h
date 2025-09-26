@@ -8,6 +8,7 @@ namespace csci3081{
 
 class Button {
 public:
+    Button();
     Button(int buttonImgWidth, int buttonImgHeight);
     ~Button();
 
