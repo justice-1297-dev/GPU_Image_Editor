@@ -4,6 +4,7 @@
 #include "TextureRectangle.h"
 #include "ShaderProgram.h"
 #include "Window.h"
+#include "Button.h"
 
 #include "App.h"
 
