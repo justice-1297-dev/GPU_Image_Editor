@@ -12,7 +12,7 @@ public:
     int run();
 
     
-private:
+public:
     int windowWidth;
     int windowHeight;
     float buttonWidth;
