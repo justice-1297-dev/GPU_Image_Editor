@@ -13,24 +13,28 @@
 
 namespace csci3081 {
 
-Image::Image() : width(0), height(0), channels(0), img(nullptr) {
+Image::Image() : width(0), height(0), channels(0), pixels(nullptr) {
 }
 
 Image::Image(const std::string& filename) {
 	unsigned char *data = stbi_load(filename.c_str(), &width, &height, &channels, STBI_rgb_alpha);
-    components = 4;
+    channels = 4;
 
-	pixels = new unsigned char[width*height*components];
-	std::copy(data, data + width*height*components, pixels);
+	pixels = new unsigned char[width*height*channels];
+	std::copy(data, data + width*height*channels, pixels);
 	stbi_image_free(data);
 }
 
 Image::Image(int width, int height) : width(width), height(height), channels(4) {
-    pixels = new unsigned char[width*height*components];
+    pixels = new unsigned char[width*height*channels];
 }
 
 Image::Image(const Image& img){
-
+    width = img.width;
+    height = img.height;
+    channels = img.channels;
+    pixels = new unsigned char[width * height * channels];
+    std::copy(img.pixels, img.pixels + width * height * channels, pixels);
 }
 
 Image::~Image() {
@@ -63,20 +67,20 @@ int Image::getHeight() const {
 }
 
 Color Image::getPixel(int x, int y) const {
-    unsigned char* img = &img[(x + width*y)*channels];
-    return Color(img[0], img[1], img[2], img[3]);
+    const unsigned char* p = &pixels[(x + width*y)*channels];
+    return Color(p[0], p[1], p[2], p[3]);
 }
 
 void Image::setPixel(int x, int y, const Color& color) {
-    unsigned char* img = &img[(x + width*y)*channels];
-    img[0] = color[0];
-    img[1] = color[1];
-    img[2] = color[2];
-    img[3] = color[3];
+    unsigned char* p = &pixels[(x + width*y)*channels];
+    p[0] = color[0];
+    p[1] = color[1];
+    p[2] = color[2];
+    p[3] = color[3];
 }
 
 void Image::saveAs(const std::string& filename) const {
-    stbi_write_png(filename.c_str(), width, height, channels, img, width*channels);
+    stbi_write_png(filename.c_str(), width, height, channels, pixels, width*channels);
 }
 
 // unsigned char* Image::load_image(const std::string& fileName, int& width, int& height, int& channels){
