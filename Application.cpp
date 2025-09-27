@@ -50,6 +50,7 @@ int Application::run() {
     //  Load background image
     // -------------------------------------
     Image image("img_small.jpeg");
+    
     // int width, height, channels;
     // unsigned char *img = load_image("img_small.jpeg", width, height, channels);
     // app.imgWidth = width;
@@ -219,7 +220,7 @@ int Application::run() {
     // Create Background Texture with width and height and img data (Texture Constructor)
     // -------------------------------------
     
-    Texture backgroundTexture(app.imgWidth, app.imgHeight, app.img);
+    Texture backgroundTexture(image);
     
     // -------------------------------------
     // Create button
@@ -238,13 +239,13 @@ int Application::run() {
     // -------------------------------------
     // Create Button Texture with buttonImageWidth, buttonImgHeight and buttonImg data
     // -------------------------------------
-    Texture buttonTexture(buttonWidth, buttonHeight, button.getImg());
+    Texture buttonTexture(buttonImage);
     
 
     // -------------------------------------
     // Set the window drawing area
     // -------------------------------------
-    Window window.set();
+    appWindow.set();
     // glViewport(0, 0, width, height);
 
     // -------------------------------------

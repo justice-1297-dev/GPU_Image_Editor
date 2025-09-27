@@ -5,7 +5,7 @@ namespace csci3081{
 
 class ShaderProgram {
 public:
-    ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath));
+    ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
     ~ShaderProgram();
     void use();
     unsigned int getShaderProgram(){ return shaderProgram;}
