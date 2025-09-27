@@ -17,6 +17,11 @@
 // #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
+
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+
 namespace csci3081{
 // Holds all the application specific variables
 // struct App {
@@ -36,9 +41,6 @@ namespace csci3081{
 
 // Prototypes for user interaction
 // unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels);
-void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 Application::Application(){}
 Application::~Application(){
