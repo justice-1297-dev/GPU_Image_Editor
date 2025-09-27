@@ -45,7 +45,7 @@ Application::~Application(){
     glfwTerminate();
 }
 int Application::run() {
-    Application& app = *this;
+    // Application& app = *this;
     // -------------------------------------
     //  Load background image
     // -------------------------------------
@@ -73,7 +73,7 @@ int Application::run() {
     // -------------------------------------
     // Create window of height and width.  Initialize input callbacks
     // -------------------------------------
-    Window appWindow(app.windowWidth, app.windowHeight);
+    Window appWindow(windowWidth, windowHeight);
     // glfwInit();
     // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -106,7 +106,7 @@ int Application::run() {
     // -------------------------------------
     // Create Shader Program (Renders Image)
     // -------------------------------------
-    ShaderProgram shader;
+    ShaderProgram shader("src/shaders/quad.vsh", "src/shaders/button.fsh");
     // const char *vertexShaderSource = "#version 330 core\n"
     // "layout (location = 0) in vec3 aPos;\n"
     // "layout (location = 1) in vec2 coord;\n"
@@ -263,7 +263,7 @@ int Application::run() {
         // -------------------------------------
         // Copy background image data to the texture
         // -------------------------------------
-        backgroundTexture.copyToGPU(app.imgWidth, app.imgHeight, app.img);
+        backgroundTexture.copyToGPU(image);
 
         // -------------------------------------
         // Render Graphics
@@ -423,9 +423,9 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     // -------------------------------------
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
         App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
-        if (app.buttonHighlighted) {
+        if (buttonHighlighted) {
             std::cout << "Clicked" << std::endl;
-            app.buttonClicked = true;
+            buttonClicked = true;
         }
         else {
             app.drawing = true;
