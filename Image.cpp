@@ -30,10 +30,10 @@ Image::Image(int width, int height) : width(width), height(height), channels(4) 
 }
 
 Image::Image(const Image& img){
-    width = img.width;
-    height = img.height;
-    channels = img.channels;
-    pixels = new unsigned char[width * height * channels];
+    this->width = img.width;
+    this->height = img.height;
+    this->channels = img.channels;
+    this->pixels = new unsigned char[width * height * channels];
     std::copy(img.pixels, img.pixels + width * height * channels, pixels);
 }
 
@@ -44,18 +44,15 @@ Image::~Image() {
     // stbi_image_free(buttonImg);
 }
 
-// Image& Image::operator=(const Image& img) {
-//     if (this != &other) {
-//         width = other.width;
-//         height = other.height;
-//         channels = other.channels;
+void Image::operator=(const Image& image) {
+    this->width = image.width;
+    this->height = image.height;
+    this->components = image.components;
+    delete[] this->pixels;
+    this->pixels = new unsigned char[width*height*components];
+	std::copy(image.pixels, image.pixels + width*height*components, pixels);
+}
 
-//         delete[] img;
-//         img = new unsigned char[width * height * channels];
-//         std::copy(other.img, other.img + width * height * channels, img);
-//     }
-//     return *this;
-// }
 
 
 int Image::getWidth() const {
@@ -83,17 +80,7 @@ void Image::saveAs(const std::string& filename) const {
     stbi_write_png(filename.c_str(), width, height, channels, pixels, width*channels);
 }
 
-// unsigned char* Image::load_image(const std::string& fileName, int& width, int& height, int& channels){
-//     unsigned char *img = stbi_load(fileName.c_str(), &width, &height, &channels, 4);
-//     channels = 4;
-//     if(img == NULL) {
-//         printf("Error in loading the image\n");
-//         exit(1);
-//     }
-//     // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
-//     return img;
-// }
 void Image::operator=(const Image& image) {
     this->width = image.width;
     this->height = image.height;
@@ -102,4 +89,5 @@ void Image::operator=(const Image& image) {
     this->pixels = new unsigned char[width*height*channels];
 	std::copy(image.pixels, image.pixels + width*height*channels, pixels);
 }
+
 }
