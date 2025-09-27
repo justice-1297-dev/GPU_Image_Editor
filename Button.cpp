@@ -1,5 +1,5 @@
 #include "Button.h"
-#include "Application.h"
+#include "ShaderProgram.h"
 
 // #define STB_IMAGE_IMPLEMENTATION
 // #include "stb_image.h"
@@ -8,11 +8,11 @@
 // #define STB_IMAGE_WRITE_IMPLEMENTATION
 // #include "stb_image_write.h"
 #include <stb_image.h>
-
+#include <glad/glad.h>
 #include <iostream>
 namespace csci3081 {
 
-Button::Button(){
+Button::Button(float x, float y, float w, float h, const Image& image){
     float aspect = 1.0f*buttonImgWidth/buttonImgHeight;
     buttonX = 0.01;
     buttonY = 0.01;
@@ -34,11 +34,19 @@ Button::Button(){
 Button::~Button(){
 }
 
-void Button::load_button(const std::string& filename){
-    buttonImg = stbi_load(filename.c_str(), &buttonImgWidth, &buttonImgHeight, &buttonImgChannels, 4);
-    if (!buttonImg) {
-        std::cerr << "Failed to load button image: " << filename << std::endl;
-    }
+// void Button::update(const Image& image){
+//     buttonImg = stbi_load(image.saveAs(), &buttonImgWidth, &buttonImgHeight, &buttonImgChannels, 4);
+//     if (!buttonImg) {
+//         std::cerr << "Failed to load button image: " << image << std::endl;
+//     }
+// }
+
+void Button::draw() {
+    const ShaderProgram& shaderProgram = getShaderProgram();
+    shaderProgram.use();
+    int buttonHighlightLoc = glGetUniformLocation(shaderProgram.getId(), "highlight");
+    glUniform1i(buttonHighlightLoc, highlighted && !clicked);
+    Glyph::draw();
 }
 
 }

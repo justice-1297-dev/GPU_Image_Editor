@@ -4,6 +4,8 @@
 #include "TextureRectangle.h"
 #include "ShaderProgram.h"
 #include "Window.h"
+#include "Quad.h"
+#include "Glyph.h"
 #include "Button.h"
 
 
@@ -63,7 +65,7 @@ int Application::run() {
     // Image buttonImage;
     // Button button;
     // button.load_button("reset.png");
-    Image buttonImage(""reset.png"");
+    Image buttonImage("reset.png");
     // Texture buttonTexture(app.imgWidth, app.imgHeight, app.img);
     // int buttonImgWidth, buttonImgHeight, buttonImgChannels;
     // unsigned char *buttonImg = load_image("reset.png", buttonImgWidth, buttonImgHeight, buttonImgChannels);
@@ -224,7 +226,7 @@ int Application::run() {
     // -------------------------------------
     // Create button
     // -------------------------------------
-    // Button button(buttonImgWidth, buttonImgHeigh);
+    Button button(0.01f, 0.01f, 0.1f, 0.1f, buttonImage);
     // Button button;
 
     // float aspect = 1.0f*app.windowWidth/app.windowHeight;

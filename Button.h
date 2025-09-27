@@ -8,22 +8,28 @@ namespace csci3081{
 
 class Button {
 public:
-    Button();
-    // Button(int buttonImgWidth, int buttonImgHeight);
-    ~Button();
+    Button(float x, float y, float w, float h, const Image& image);
 
-    void load_button(const std::string& filename);
-    void load(const std::string& filename);
+    void update(const Image& image);
     int getWidth() const { return buttonImgWidth; }
     int getHeight() const { return buttonImgHeight; }
     unsigned char* getImg() const { return buttonImg; }
     void draw();
+    bool contains(float buttonX, float buttonY);
+    void setHighlighted(bool highlighted) { this->buttonHighlighted = highlighted; }
+    void setClicked(bool clicked) { this->buttonClicked = clicked; }
+    bool isHighlighted() { return buttonHighlighted; }
 
 private:
+    int buttonWidth;
+    int buttonHeight;
+    unsigned char* buttonImg;
     int buttonImgWidth, buttonImgHeight, buttonImgChannels;
-    float buttonX, buttonY,  buttonWidth, buttonHeight;
-    bool buttonHighlighted, buttonClicked;
-    unsigned char *buttonImg;
+    float buttonX;
+    float buttonY;
+
+    bool buttonHighlighted = false;
+    bool buttonClicked = false;
 };
 
 }
