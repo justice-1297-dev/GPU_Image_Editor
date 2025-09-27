@@ -18,11 +18,10 @@
 #include <stb_image.h>
 
 
+namespace csci3081{
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
-
-namespace csci3081{
 // Holds all the application specific variables
 // struct App {
 //     int windowWidth;
@@ -47,7 +46,6 @@ Application::~Application(){
     glfwTerminate();
 }
 int Application::run() {
-    // Application& app = *this;
     // -------------------------------------
     //  Load background image
     // -------------------------------------
@@ -82,7 +80,7 @@ int Application::run() {
     // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     // glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     // GLFWwindow* window = glfwCreateWindow(width, height, "Image Editor", NULL, NULL);
-    if (appWindow.getWindow == NULL)
+    if (appWindow.getWindow() == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -90,8 +88,8 @@ int Application::run() {
     }
     glfwMakeContextCurrent(appWindow.getWindow());
     glfwSetFramebufferSizeCallback(ppWindow.getWindow(), framebuffer_size_callback);
-    glfwSetCursorPosCallback(ppWindow.getWindow(), cursor_position_callback);
-    glfwSetMouseButtonCallback(ppWindow.getWindow(), mouse_button_callback);
+    glfwSetCursorPosCallback(appWindow.getWindow(), cursor_position_callback);
+    glfwSetMouseButtonCallback(appWindow.getWindow(), mouse_button_callback);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
@@ -357,45 +355,45 @@ int Application::run() {
     return 0;
 }
 
-// void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
-// {
-//     // -------------------------------------
-//     // Get the applicaiton
-//     // -------------------------------------
-//     App& app = *static_cast<App*>(glfwGetWindowUserPointer(window));
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+{
+    // -------------------------------------
+    // Get the applicaiton
+    // -------------------------------------
+    Application& app = *static_cast<Application*>(glfwGetWindowUserPointer(window));
 
-//     // -------------------------------------
-//     // If the mouse is over the button, highlight it
-//     // -------------------------------------
-//     float x = xpos/app.windowWidth;
-//     float y = ypos/app.windowHeight;
-//     if (x >= app.buttonX && x <= app.buttonX + app.buttonWidth && y >= app.buttonY && y <= app.buttonY + app.buttonHeight ) {
-//         app.buttonHighlighted = true;
-//     }
-//     else {
-//         app.buttonHighlighted = false;
-//     }
+    // -------------------------------------
+    // If the mouse is over the button, highlight it
+    // -------------------------------------
+    float x = xpos/app.windowWidth;
+    float y = ypos/app.windowHeight;
+    if (x >= app.buttonX && x <= app.buttonX + app.buttonWidth && y >= app.buttonY && y <= app.buttonY + app.buttonHeight ) {
+        app.buttonHighlighted = true;
+    }
+    else {
+        app.buttonHighlighted = false;
+    }
 
-//     // -------------------------------------
-//     // If we are drawing, edit the background image
-//     // -------------------------------------
-//     if (app.drawing) {
-//         std::cout << x << " " << y << std::endl;
-//         int imgX = x * app.imgWidth;
-//         int imgY = y * app.imgHeight;
-//         int radius = 2;
-//         for (int i = imgX-radius; i < imgX+radius+1; i++) {
-//             for (int j = imgY-radius; j < imgY + radius+1; j++) {
-//                 app.img[(j*app.imgWidth + i)*4 + 0] = 0;
-//                 app.img[(j*app.imgWidth + i)*4 + 1] = 0;
-//                 app.img[(j*app.imgWidth + i)*4 + 2] = 255;
-//                 app.img[(j*app.imgWidth + i)*4 + 3] = 255;
-//             }
-//         }
-//     }
+    // -------------------------------------
+    // If we are drawing, edit the background image
+    // -------------------------------------
+    if (app.drawing) {
+        std::cout << x << " " << y << std::endl;
+        int imgX = x * app.imgWidth;
+        int imgY = y * app.imgHeight;
+        int radius = 2;
+        for (int i = imgX-radius; i < imgX+radius+1; i++) {
+            for (int j = imgY-radius; j < imgY + radius+1; j++) {
+                app.img[(j*app.imgWidth + i)*4 + 0] = 0;
+                app.img[(j*app.imgWidth + i)*4 + 1] = 0;
+                app.img[(j*app.imgWidth + i)*4 + 2] = 255;
+                app.img[(j*app.imgWidth + i)*4 + 3] = 255;
+            }
+        }
+    }
 
     
-// }
+}
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
