@@ -6,7 +6,6 @@
 #include "Window.h"
 #include "Button.h"
 
-
 #include <iostream>
 
 // Include glad and glfw for graphics and windowing
@@ -19,70 +18,27 @@
 
 
 namespace csci3081{
+
+// Prototypes for user interaction
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
-// Holds all the application specific variables
-// struct App {
-//     int windowWidth;
-//     int windowHeight;
-//     float buttonWidth;
-//     float buttonHeight;
-//     float buttonX;
-//     float buttonY;
-//     bool buttonHighlighted;
-//     bool buttonClicked;
-//     bool drawing = false;
-//     int imgWidth;
-//     int imgHeight;
-//     unsigned char* img;
-// } app;
-
-// Prototypes for user interaction
-// unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels);
 
 Application::Application(){
     windowWidth = 800;
     windowHeight = 600;
 }
+
 Application::~Application(){
     glfwTerminate();
 }
+
 int Application::run() {
-    // -------------------------------------
-    //  Load background image
-    // -------------------------------------
     Image image("img_small.jpeg");
     
-    // int width, height, channels;
-    // unsigned char *img = load_image("img_small.jpeg", width, height, channels);
-    // app.imgWidth = width;
-    // app.imgHeight = height;
-    // app.img = img;
-
-    // -------------------------------------
-    //  Load button image
-    // -------------------------------------
-    // Button button;
-    // Image buttonImage;
-    // Button button;
-    // button.load_button("reset.png");
     Image buttonImage("reset.png");
-    // Texture buttonTexture(app.imgWidth, app.imgHeight, app.img);
-    // int buttonImgWidth, buttonImgHeight, buttonImgChannels;
-    // unsigned char *buttonImg = load_image("reset.png", buttonImgWidth, buttonImgHeight, buttonImgChannels);
-    
 
-    // -------------------------------------
-    // Create window of height and width.  Initialize input callbacks
-    // -------------------------------------
     Window appWindow(windowWidth, windowHeight);
-    // glfwInit();
-    // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    // glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    // GLFWwindow* window = glfwCreateWindow(width, height, "Image Editor", NULL, NULL);
     if (appWindow.getWindow() == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -98,162 +54,20 @@ int Application::run() {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
-
-    // -------------------------------------
-    // Set the application and the window height and width
-    // -------------------------------------
     glfwSetWindowUserPointer(appWindow.getWindow(), this);
-    // app.windowWidth = width;
-    // app.windowHeight = height;
 
-    // -------------------------------------
-    // Create Shader Program (Renders Image)
-    // -------------------------------------
     ShaderProgram shader("src/shaders/quad.vsh", "src/shaders/button.fsh");
-    // const char *vertexShaderSource = "#version 330 core\n"
-    // "layout (location = 0) in vec3 aPos;\n"
-    // "layout (location = 1) in vec2 coord;\n"
-    // "uniform vec3 offset;\n"
-    // "uniform vec3 scale;\n"
-    // "out vec2 interpCoord;\n"
-    // "void main()\n"
-    // "{\n"
-    // "   interpCoord = coord;\n"
-    // //"   float scale = 0.5;\n"
-    // "   gl_Position = vec4(aPos.xyz*scale + offset, 1.0);\n"
-    // "}\0";
-    // const char *fragmentShaderSource = "#version 330 core\n"
-    // "out vec4 FragColor;\n"
-    // "uniform sampler2D tex;\n"
-    // "uniform bool highlight;\n"
-    // "in vec2 interpCoord;\n"
-    // "void main()\n"
-    // "{\n"
-    // "   vec4 color = texture(tex, interpCoord); \n"
-    // "   if (color.a < 0.9) {discard;} \n"
-    // "   if (highlight) { \n"
-    // "       FragColor = clamp(color*vec4(2.0,2.0,2.0,1.0), 0, 1.0); \n"
-    // "   } \n"
-    // "   else { \n"
-    // "       FragColor = texture(tex, interpCoord);\n"
-    // "   } \n"
-    // "}\n\0";
-    // // vertex shader
-    // unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    // glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-    // glCompileShader(vertexShader);
-    // // check for shader compile errors
-    // int success;
-    // char infoLog[512];
-    // glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    // if (!success)
-    // {
-    //     glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-    //     std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-    // }
-    // // fragment shader
-    // unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    // glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-    // glCompileShader(fragmentShader);
-    // // check for shader compile errors
-    // glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-    // if (!success)
-    // {
-    //     glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-    //     std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-    // }
-    // // link shaders
-    // unsigned int shaderProgram = glCreateProgram();
-    // glAttachShader(shaderProgram, vertexShader);
-    // glAttachShader(shaderProgram, fragmentShader);
-    // glLinkProgram(shaderProgram);
-    // // check for linking errors
-    // glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-    // if (!success) {
-    //     glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-    //     std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-    // }
-    // glDeleteShader(vertexShader);
-    // glDeleteShader(fragmentShader);
-
-    // -------------------------------------
-    // Create Textured Rectangle (For drawing images to the screen)
-    // -------------------------------------
 
     TextureRectangle texRec;
-    // float vertices[] = {
-    //      1.0f,  1.0f, 0.0f,  // top right
-    //      1.0f, -1.0f, 0.0f,  // bottom right
-    //     -1.0f, -1.0f, 0.0f,  // bottom left
-    //     -1.0f,  1.0f, 0.0f   // top left 
-    // };
-    // float coords[] = {
-    //      1.0f,  0.0f,  // top right
-    //      1.0f, 1.0f,  // bottom right
-    //     0.0f, 1.0f,  // bottom left
-    //     0.0f,  0.0f   // top left 
-    // };
-    // unsigned int indices[] = {  // note that we start from 0!
-    //     0, 1, 3,  // first Triangle
-    //     1, 2, 3   // second Triangle
-    // };
-    // unsigned int VBO, VAO, EBO;
-    // glGenVertexArrays(1, &VAO);
-    // glGenBuffers(1, &VBO);
-    // glGenBuffers(1, &EBO);
-    // // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-    // glBindVertexArray(VAO);
-    // // Add the data to the VBO
-    // glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    // glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) + sizeof(coords), (void*)0, GL_STATIC_DRAW);
-    // glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), &vertices);
-    // glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices), sizeof(coords), &coords);
-    // // Add the elements to the EBO
-    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    // glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-    // // Setup vertex attributes to be used in shader
-    // glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    // glEnableVertexAttribArray(0);
-    // glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)(sizeof(vertices)));
-    // glEnableVertexAttribArray(1);
-    // glBindBuffer(GL_ARRAY_BUFFER, 0); 
-    // glBindVertexArray(0); 
 
-    // -------------------------------------
-    // Create Background Texture with width and height and img data (Texture Constructor)
-    // -------------------------------------
-    
     Texture backgroundTexture(image);
     
-    // -------------------------------------
-    // Create button
-    // -------------------------------------
     Button button(0.01f, 0.01f, 0.1f, 0.1f, buttonImage);
-    // Button button;
 
-    // float aspect = 1.0f*app.windowWidth/app.windowHeight;
-    // app.buttonX = 0.01;
-    // app.buttonY = 0.01;
-    // app.buttonWidth = 0.1;
-    // app.buttonHeight = 0.1*aspect;
-    // app.buttonHighlighted = false;
-    // app.buttonClicked = false;
-
-    // -------------------------------------
-    // Create Button Texture with buttonImageWidth, buttonImgHeight and buttonImg data
-    // -------------------------------------
     Texture buttonTexture(buttonImage);
     
-
-    // -------------------------------------
-    // Set the window drawing area
-    // -------------------------------------
     appWindow.set();
-    // glViewport(0, 0, width, height);
 
-    // -------------------------------------
-    // Loop until the window should close
-    // -------------------------------------
     while(!glfwWindowShouldClose(appWindow.getWindow()))
     {
         // -------------------------------------
@@ -285,21 +99,13 @@ int Application::run() {
             // -------------------------------------
             // Use the texture defined above
             // -------------------------------------
-            backgroundTexture.use(shader.getId());
+            // backgroundTexture.use(shader.getId());
 
             // -------------------------------------
             // Draw the Texture Rectangle defined above
             // -------------------------------------
-            // 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, false
-            texRec.draw(shader.getId());
-            // int scaleLoc = glGetUniformLocation(shaderProgram, "scale");
-            // int offsetLoc = glGetUniformLocation(shaderProgram, "offset");
-            // int highlightLoc = glGetUniformLocation(shaderProgram, "highlight");
-            // glUniform3f(scaleLoc, 1.0f, 1.0f, 1.0f);
-            // glUniform3f(offsetLoc, 0.0f, 0.0f, 0.0f);
-            // glUniform1i(highlightLoc, false);
-            // glBindVertexArray(VAO);
-            // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+            // texRec.draw(shader.getId());
+            button.draw();
 
             // -------------------------------------
             // Use the button texture defined above
@@ -310,15 +116,6 @@ int Application::run() {
             // Draw button using the Texture Rectangle defined above
             // -------------------------------------
             texRec.draw(shader.getId());
-            // int buttonScaleLoc = glGetUniformLocation(shaderProgram, "scale");
-            // int buttonOffsetLoc = glGetUniformLocation(shaderProgram, "offset");
-            // int buttonHighlightLoc = glGetUniformLocation(shaderProgram, "highlight");
-            // glUniform3f(buttonScaleLoc, app.buttonWidth, app.buttonHeight, 1.0f);
-            // glUniform3f(buttonOffsetLoc, app.buttonX*2.0-1.0 + app.buttonWidth, 1.0 - app.buttonHeight - app.buttonY*2.0, 0.0f);
-            // glUniform1i(buttonHighlightLoc, app.buttonHighlighted && !app.buttonClicked);
-            // glBindVertexArray(VAO);
-            // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
         }
 
         // -------------------------------------
@@ -331,30 +128,6 @@ int Application::run() {
         // -------------------------------------
         appWindow.pollEvents();
     }
-
-    // -------------------------------------
-    // Destroy Textured Rectangle
-    // -------------------------------------
-    // glDeleteVertexArrays(1, &VAO);
-    // glDeleteBuffers(1, &VBO);
-    // glDeleteBuffers(1, &EBO);
-
-    // -------------------------------------
-    // Destroy Shader Program
-    // -------------------------------------
-    // glDeleteProgram(shaderProgram);
-
-    // -------------------------------------
-    // Destroy Images
-    // -------------------------------------
-    // stbi_image_free(img);
-    // stbi_image_free(buttonImg);
-    
-    // -------------------------------------
-    // Terminate windowing application
-    // -------------------------------------
-    // glfwTerminate();
-
     return 0;
 }
 
