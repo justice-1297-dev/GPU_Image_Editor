@@ -282,13 +282,13 @@ int Application::run() {
             // -------------------------------------
             // Use the texture defined above
             // -------------------------------------
-            backgroundTexture.use(shader.getShaderProgram());
+            backgroundTexture.use(shader.getId());
 
             // -------------------------------------
             // Draw the Texture Rectangle defined above
             // -------------------------------------
             // 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, false
-            texRec.draw(shader.getShaderProgram());
+            texRec.draw(shader.getId());
             // int scaleLoc = glGetUniformLocation(shaderProgram, "scale");
             // int offsetLoc = glGetUniformLocation(shaderProgram, "offset");
             // int highlightLoc = glGetUniformLocation(shaderProgram, "highlight");
@@ -301,12 +301,12 @@ int Application::run() {
             // -------------------------------------
             // Use the button texture defined above
             // -------------------------------------
-            buttonTexture.use(shader.getShaderProgram());
+            buttonTexture.use(shader.getId());
 
             // -------------------------------------
             // Draw button using the Texture Rectangle defined above
             // -------------------------------------
-            texRec.draw(shader.getShaderProgram());
+            texRec.draw(shader.getId());
             // int buttonScaleLoc = glGetUniformLocation(shaderProgram, "scale");
             // int buttonOffsetLoc = glGetUniformLocation(shaderProgram, "offset");
             // int buttonHighlightLoc = glGetUniformLocation(shaderProgram, "highlight");

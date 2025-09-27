@@ -1,14 +1,16 @@
 #ifndef SHADERPROGRAM_H
 #define SHADERPROGRAM_H
 
+#include <string>
+
 namespace csci3081{
 
 class ShaderProgram {
 public:
     ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath);
     ~ShaderProgram();
-    void use();
-    unsigned int getShaderProgram(){ return shaderProgram;}
+    void use() const;
+    unsigned int getId(){ return shaderProgram;}
 
 private:
     unsigned int shaderProgram;
