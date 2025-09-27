@@ -87,7 +87,7 @@ int Application::run() {
         return -1;
     }
     glfwMakeContextCurrent(appWindow.getWindow());
-    glfwSetFramebufferSizeCallback(ppWindow.getWindow(), framebuffer_size_callback);
+    glfwSetFramebufferSizeCallback(appWindow.getWindow(), framebuffer_size_callback);
     glfwSetCursorPosCallback(appWindow.getWindow(), cursor_position_callback);
     glfwSetMouseButtonCallback(appWindow.getWindow(), mouse_button_callback);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
