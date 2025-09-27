@@ -3,7 +3,6 @@
 
 #include <string>
 #include "Color.h"
-#include "Application.h"
 
 namespace csci3081 {
 
@@ -21,7 +20,6 @@ public:
     ~Image();
 
     //assignement operator
-    Image& operator=(const Image& img);
 
     // methods
     void saveAs(const std::string& filename) const;
@@ -29,19 +27,12 @@ public:
     int getHeight() const;
     Color getPixel(int x, int y) const;
     void setPixel(int x, int y, const Color& color);
-    unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels);
+    const unsigned char* getData() const { return pixels; }
+    void operator=(const Image& image);
 
 private:
-    // int width;
-    // int height;
-    // int components;
-    // unsigned char* pixels;
-    
     int width, height, channels;
-    unsigned char *img = load_image("img_small.jpeg", width, height, channels);
-    // app.imgWidth = width;
-    // app.imgHeight = height;
-    // app.img = img;
+    unsigned char* pixels;
 };
 
 }

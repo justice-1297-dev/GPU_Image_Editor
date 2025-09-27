@@ -2,11 +2,18 @@
 #include <iostream>
 
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
 
 namespace csci3081
 {
-ShaderProgram::ShaderProgram(){
+
+std::string load_shader_file(const std::string& shader) {
+    std::ifstream file(shader.c_str());
+	std::stringstream buffer;
+	buffer << file.rdbuf();
+	return buffer.str();
+}
+
+ShaderProgram::ShaderProgram(const std::string& vertexShaderPath, const std::string& fragmentShaderPath){
     const char *vertexShaderSource = "#version 330 core\n"
     "layout (location = 0) in vec3 aPos;\n"
     "layout (location = 1) in vec2 coord;\n"

@@ -6,7 +6,9 @@ namespace csci3081{
 class Application{
 public:
     Application();
+    ~Application();
     int run();
+
     
 private:
     int windowWidth;

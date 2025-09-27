@@ -2,11 +2,10 @@
 
 // Include glad and glfw for graphics and windowing
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
 
 namespace csci3081{
 
-Texture::Texture(int width, int height, unsigned char* img){
+Texture::Texture(const Image& image){
     glGenTextures(1, &texture);  
     glBindTexture(GL_TEXTURE_2D, texture);  
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
@@ -17,7 +16,9 @@ Texture::Texture(int width, int height, unsigned char* img){
     glGenerateMipmap(GL_TEXTURE_2D);
 }
 
-Texture::~Texture(){}
+Texture::~Texture(){
+    glDeleteTextures(1, &texture);
+}
 
 void Texture::use(unsigned int shaderProgram){
     glActiveTexture(GL_TEXTURE0);
@@ -26,9 +27,9 @@ void Texture::use(unsigned int shaderProgram){
     glUniform1i(texLoc, 0);
 }
 
-void Texture::copyToGPU(int width, int height, unsigned char* img){
+void Texture::copyToGPU(const Image& image){
     glBindTexture(GL_TEXTURE_2D, texture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getWidth(), image.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, img);
 }
 
 }

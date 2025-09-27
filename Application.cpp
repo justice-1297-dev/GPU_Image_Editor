@@ -19,34 +19,37 @@
 
 namespace csci3081{
 // Holds all the application specific variables
-struct App {
-    int windowWidth;
-    int windowHeight;
-    float buttonWidth;
-    float buttonHeight;
-    float buttonX;
-    float buttonY;
-    bool buttonHighlighted;
-    bool buttonClicked;
-    bool drawing = false;
-    int imgWidth;
-    int imgHeight;
-    unsigned char* img;
-} app;
+// struct App {
+//     int windowWidth;
+//     int windowHeight;
+//     float buttonWidth;
+//     float buttonHeight;
+//     float buttonX;
+//     float buttonY;
+//     bool buttonHighlighted;
+//     bool buttonClicked;
+//     bool drawing = false;
+//     int imgWidth;
+//     int imgHeight;
+//     unsigned char* img;
+// } app;
 
 // Prototypes for user interaction
 // unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels);
-// void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
-// void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-// void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 Application::Application(){}
-
+Application::~Application(){
+    glfwTerminate();
+}
 int Application::run() {
-    App app;
+    Application& app = *this;
     // -------------------------------------
     //  Load background image
     // -------------------------------------
+    Image image("img_small.jpeg");
     // int width, height, channels;
     // unsigned char *img = load_image("img_small.jpeg", width, height, channels);
     // app.imgWidth = width;
@@ -58,8 +61,9 @@ int Application::run() {
     // -------------------------------------
     // Button button;
     // Image buttonImage;
-    Button button;
-    button.load_button("reset.png");
+    // Button button;
+    // button.load_button("reset.png");
+    Image buttonImage(""reset.png"");
     // Texture buttonTexture(app.imgWidth, app.imgHeight, app.img);
     // int buttonImgWidth, buttonImgHeight, buttonImgChannels;
     // unsigned char *buttonImg = load_image("reset.png", buttonImgWidth, buttonImgHeight, buttonImgChannels);
@@ -94,7 +98,7 @@ int Application::run() {
     // -------------------------------------
     // Set the application and the window height and width
     // -------------------------------------
-    glfwSetWindowUserPointer(appWindow.getWindow(), &app);
+    glfwSetWindowUserPointer(appWindow.getWindow(), this);
     // app.windowWidth = width;
     // app.windowHeight = height;
 
@@ -240,7 +244,7 @@ int Application::run() {
     // -------------------------------------
     // Set the window drawing area
     // -------------------------------------
-    appWindow.set();
+    Window window.set();
     // glViewport(0, 0, width, height);
 
     // -------------------------------------
@@ -345,7 +349,7 @@ int Application::run() {
     // -------------------------------------
     // Terminate windowing application
     // -------------------------------------
-    glfwTerminate();
+    // glfwTerminate();
 
     return 0;
 }

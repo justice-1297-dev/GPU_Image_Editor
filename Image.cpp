@@ -18,15 +18,15 @@ Image::Image() : width(0), height(0), channels(0), img(nullptr) {
 
 Image::Image(const std::string& filename) {
 	unsigned char *data = stbi_load(filename.c_str(), &width, &height, &channels, STBI_rgb_alpha);
-    channels = 4;
+    components = 4;
 
-	img = new unsigned char[width*height*channels];
-	std::copy(data, data + width*height*channels, img);
+	pixels = new unsigned char[width*height*components];
+	std::copy(data, data + width*height*components, pixels);
 	stbi_image_free(data);
 }
 
 Image::Image(int width, int height) : width(width), height(height), channels(4) {
-    img = new unsigned char[width*height*channels];
+    pixels = new unsigned char[width*height*components];
 }
 
 Image::Image(const Image& img){
@@ -35,7 +35,8 @@ Image::Image(const Image& img){
 
 Image::~Image() {
     // delete[] img;
-    stbi_image_free(img);
+    // stbi_image_free(img);
+    delete[] pixels;
     // stbi_image_free(buttonImg);
 }
 
@@ -78,16 +79,23 @@ void Image::saveAs(const std::string& filename) const {
     stbi_write_png(filename.c_str(), width, height, channels, img, width*channels);
 }
 
-unsigned char* Image::load_image(const std::string& fileName, int& width, int& height, int& channels){
-    unsigned char *img = stbi_load(fileName.c_str(), &width, &height, &channels, 4);
-    channels = 4;
-    if(img == NULL) {
-        printf("Error in loading the image\n");
-        exit(1);
-    }
-    // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+// unsigned char* Image::load_image(const std::string& fileName, int& width, int& height, int& channels){
+//     unsigned char *img = stbi_load(fileName.c_str(), &width, &height, &channels, 4);
+//     channels = 4;
+//     if(img == NULL) {
+//         printf("Error in loading the image\n");
+//         exit(1);
+//     }
+//     // printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
 
-    return img;
+//     return img;
+// }
+void Image::operator=(const Image& image) {
+    this->width = image.width;
+    this->height = image.height;
+    this->channels = image.channels;
+    delete[] this->pixels;
+    this->pixels = new unsigned char[width*height*channels];
+	std::copy(image.pixels, image.pixels + width*height*channels, pixels);
 }
-
 }

@@ -28,12 +28,12 @@ public:
     const unsigned char operator[](int index) const {
         // Creates a segfault in the code
         // int* a = nullptr; int b = *a; // Delete this line
+
         return color[index];
     }
 
 private:
     unsigned char color[4];
-
 };
 
 }
