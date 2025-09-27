@@ -132,7 +132,7 @@ ShaderProgram::~ShaderProgram(){
     glDeleteProgram(shaderProgram);
 }
 
-void ShaderProgram::use(){
+void ShaderProgram::use() const{
     glUseProgram(shaderProgram);
 }
     
