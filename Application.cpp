@@ -421,8 +421,9 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     // -------------------------------------
     // handle button presses and drawing
     // -------------------------------------
+    Application& app = *static_cast<Application*>(glfwGetWindowUserPointer(window));
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-        Application& app = *static_cast<Application*>(glfwGetWindowUserPointer(window));
+        // Application& app = *static_cast<Application*>(glfwGetWindowUserPointer(window));
         if (buttonHighlighted) {
             std::cout << "Clicked" << std::endl;
             buttonClicked = true;
