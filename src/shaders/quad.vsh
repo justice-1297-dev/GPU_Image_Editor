@@ -1,15 +1,13 @@
 #version 330 core
 
-out vec4 FragColor;
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec2 coord;
 
-uniform sampler2D tex;
+uniform vec3 offset;
+uniform vec3 scale;
+out vec2 interpCoord;
 
-in vec2 interpCoord;
-
-void main()
-{
-    vec4 color = texture(tex, interpCoord); 
-    if (color.a < 0.9) {discard;} 
-    FragColor = color;
-
+void main() {
+   interpCoord = coord;
+   gl_Position = vec4(aPos.xyz*scale + offset, 1.0);
 }
