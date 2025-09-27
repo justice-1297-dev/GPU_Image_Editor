@@ -105,7 +105,7 @@ int Application::run() {
             // Draw the Texture Rectangle defined above
             // -------------------------------------
             // texRec.draw(shader.getId());
-            button.draw() const;
+            button.draw(shader);
 
             // -------------------------------------
             // Use the button texture defined above
