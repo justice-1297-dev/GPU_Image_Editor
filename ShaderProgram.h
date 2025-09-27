@@ -1,7 +1,8 @@
+#include <string>
 #ifndef SHADERPROGRAM_H
 #define SHADERPROGRAM_H
 
-#include <string>
+
 
 namespace csci3081{
 
