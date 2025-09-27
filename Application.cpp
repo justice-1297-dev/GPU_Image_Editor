@@ -41,7 +41,10 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 // Prototypes for user interaction
 // unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels);
 
-Application::Application(){}
+Application::Application(){
+    windowWidth = 800;
+    windowHeight = 600;
+}
 Application::~Application(){
     glfwTerminate();
 }
