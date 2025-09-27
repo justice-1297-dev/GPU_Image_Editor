@@ -49,14 +49,14 @@ std::string load_shader_file(const std::string& shader) {
 //     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 //     glCompileShader(vertexShader);
     // check for shader compile errors
-    int success;
-    char infoLog[512];
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    if (!success)
-    {
-        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-    }
+    // int success;
+    // char infoLog[512];
+    // glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+    // if (!success)
+    // {
+    //     glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+    //     std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+    // }
 //     // fragment shader
 //     unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 //     glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
