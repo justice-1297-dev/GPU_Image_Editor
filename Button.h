@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Image.h"
+#include "ShaderProgram.h"
 
 namespace csci3081{
 
