@@ -40,7 +40,7 @@ Button::Button(float x, float y, float w, float h, const Image& image){
 // }
 
 void Button::draw(const ShaderProgram& shader) const{
-    const ShaderProgram& shaderProgram = getShaderProgram();
+    const ShaderProgram& shaderProgram = getId();
     shaderProgram.use();
     int buttonHighlightLoc = glGetUniformLocation(shaderProgram.getId(), "highlight");
     glUniform1i(buttonHighlightLoc, highlighted && !clicked);
