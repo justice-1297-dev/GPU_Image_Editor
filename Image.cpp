@@ -47,7 +47,7 @@ Image::~Image() {
 void Image::operator=(const Image& image) {
     this->width = image.width;
     this->height = image.height;
-    this->channels = image.components;
+    this->channels = image.channels;
     delete[] this->pixels;
     this->pixels = new unsigned char[width*height*channels];
 	std::copy(image.pixels, image.pixels + width*height*channels, pixels);
@@ -78,16 +78,6 @@ void Image::setPixel(int x, int y, const Color& color) {
 
 void Image::saveAs(const std::string& filename) const {
     stbi_write_png(filename.c_str(), width, height, channels, pixels, width*channels);
-}
-
-
-void Image::operator=(const Image& image) {
-    this->width = image.width;
-    this->height = image.height;
-    this->channels = image.channels;
-    delete[] this->pixels;
-    this->pixels = new unsigned char[width*height*channels];
-	std::copy(image.pixels, image.pixels + width*height*channels, pixels);
 }
 
 }
