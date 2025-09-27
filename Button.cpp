@@ -39,12 +39,12 @@ Button::Button(float x, float y, float w, float h, const Image& image){
 //     }
 // }
 
-// void Button::draw() {
-//     const ShaderProgram& shaderProgram = getShaderProgram();
-//     shaderProgram.use();
-//     int buttonHighlightLoc = glGetUniformLocation(shaderProgram.getId(), "highlight");
-//     glUniform1i(buttonHighlightLoc, highlighted && !clicked);
-//     Glyph::draw();
-// }
+void Button::draw() {
+    const ShaderProgram& shaderProgram = getShaderProgram();
+    shaderProgram.use();
+    int buttonHighlightLoc = glGetUniformLocation(shaderProgram.getId(), "highlight");
+    glUniform1i(buttonHighlightLoc, highlighted && !clicked);
+    Glyph::draw();
+}
 
 }
