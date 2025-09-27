@@ -47,10 +47,10 @@ Image::~Image() {
 void Image::operator=(const Image& image) {
     this->width = image.width;
     this->height = image.height;
-    this->components = image.components;
+    this->channels = image.components;
     delete[] this->pixels;
-    this->pixels = new unsigned char[width*height*components];
-	std::copy(image.pixels, image.pixels + width*height*components, pixels);
+    this->pixels = new unsigned char[width*height*channels];
+	std::copy(image.pixels, image.pixels + width*height*channels, pixels);
 }
 
 
