@@ -6,6 +6,8 @@
 namespace csci3081{
 
 Window::Window(int width, int height){
+    this->width = width;
+    this->height = height;
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
