@@ -71,8 +71,8 @@ int Application::run() {
     TextureRectangle buttonRec;
 
     Texture backgroundTexture(image);
-    Button button(0.1f, 0.1f * aspect, 0.01f, 0.01f, buttonImage);
 
+    Button button(0.1f, 0.1f * aspect, 0.01f, 0.01f, buttonImage);
     Texture buttonTexture(buttonImage);
     
     appWindow.set();
@@ -124,8 +124,8 @@ int Application::run() {
             // -------------------------------------
             // Draw button using the Texture Rectangle defined above
             // -------------------------------------
-            buttonRec.draw(shader.getId(), -0.8f, -0.8f, -0.6f, -0.6f);
-            // button.draw(shader);
+            // buttonRec.draw(shader.getId(), -0.8f, -0.8f, -0.6f, -0.6f);
+            button.draw(shader);
         }
 
         // -------------------------------------
