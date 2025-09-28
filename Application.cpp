@@ -27,8 +27,8 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 Application::Application(){
     windowWidth = 800;
     windowHeight = 600;
-    buttonX = 0.2f;
-    buttonY = 0.2f;
+    buttonX = 0.1f;
+    buttonY = 0.1f;
     buttonWidth = 0.05f;
     buttonHeight = 0.05f;
     buttonHighlighted = false;
@@ -75,8 +75,8 @@ int Application::run() {
     const float buttonWidthNorm = buttonScale;
     const float buttonHeightNorm = buttonScale * buttonAspect;
     Button button(0.1f, 0.1f, buttonWidthNorm, buttonHeightNorm, buttonImage);
-    buttonX = 0.2f;
-    buttonY = 0.2f;
+    buttonX = 0.1f;
+    buttonY = 0.1f;
     buttonWidth = buttonWidthNorm;
     buttonHeight = buttonHeightNorm;
     // Texture buttonTexture(buttonImage);
