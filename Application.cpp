@@ -115,7 +115,7 @@ int Application::run() {
             // -------------------------------------
             // Draw button using the Texture Rectangle defined above
             // -------------------------------------
-            texRec.draw(shader.getId());
+            // texRec.draw(shader.getId());
         }
 
         // -------------------------------------
