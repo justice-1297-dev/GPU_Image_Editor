@@ -1,5 +1,5 @@
-build/ImageEditor: build/main.o build/glad.o build/Application.o build/Texture.o build/Image.o build/TextureRectangle.o build/ShaderProgram.o build/Window.o build/Button.o build/Glyph.o
-	g++ build/main.o build/glad.o build/Application.o build/Texture.o build/Image.o build/TextureRectangle.o build/ShaderProgram.o build/Window.o build/Button.o build/Glyph.o -o build/ImageEditor /usr/lib/x86_64-linux-gnu/libglfw.so.3.3
+build/ImageEditor: build/main.o build/glad.o build/Application.o build/Texture.o build/Image.o build/TextureRectangle.o build/ShaderProgram.o build/Window.o build/Button.o build/Glyph.o build/Quad.o
+	g++ build/main.o build/glad.o build/Application.o build/Texture.o build/Image.o build/TextureRectangle.o build/ShaderProgram.o build/Window.o build/Button.o build/Glyph.o build/Quad.o -o build/ImageEditor /usr/lib/x86_64-linux-gnu/libglfw.so.3.3
 
 build/main.o: main.cpp
 	mkdir -p build
@@ -36,6 +36,10 @@ build/Button.o: Button.cpp Button.h
 build/Glyph.o: Glyph.cpp Glyph.h
 	mkdir -p build
 	g++ -I. -Ilib -c Glyph.cpp -o build/Glyph.o
+
+build/Quad.o: Quad.cpp Quad.h
+	mkdir -p build
+	g++ -I. -Ilib -c Quad.cpp -o build/Quad.o
 
 build/glad.o: lib/glad/glad.c 
 	mkdir -p build
