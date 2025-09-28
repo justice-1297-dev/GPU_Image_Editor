@@ -5,7 +5,9 @@
 #include <GLFW/glfw3.h>
 
 namespace csci3081{
-
+TextureRectangle::TextureRectangle(
+    VAO = VBO = EBO = 0;
+){}
 TextureRectangle::TextureRectangle(int width, int height, unsigned char* img){
 //     float vertices[] = {
 //          1.0f,  1.0f, 0.0f,  // top right
