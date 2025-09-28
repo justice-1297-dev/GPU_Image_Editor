@@ -29,8 +29,8 @@ Application::Application(){
     windowHeight = 600;
     buttonX = 0.1f;
     buttonY = 0.1f;
-    buttonWidth = 0.1f;
-    buttonHeight = 0.1f;
+    buttonWidth = 0.05f;
+    buttonHeight = 0.05f;
     buttonHighlighted = false;
     buttonClicked = false;
 }
