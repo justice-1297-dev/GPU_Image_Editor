@@ -76,7 +76,7 @@ int Application::run() {
     Texture buttonTexture(buttonImage);
     
     appWindow.set();
-    backgroundTexture.copyToGPU(image);
+
     while(!glfwWindowShouldClose(appWindow.getWindow()))
     {
         // -------------------------------------
@@ -89,7 +89,7 @@ int Application::run() {
         // -------------------------------------
         // Copy background image data to the texture
         // -------------------------------------
-        // backgroundTexture.copyToGPU(image);
+        backgroundTexture.copyToGPU(image);
 
         // -------------------------------------
         // Render Graphics
@@ -124,7 +124,7 @@ int Application::run() {
             // -------------------------------------
             // Draw button using the Texture Rectangle defined above
             // -------------------------------------
-            buttonRec.draw(shader.getId(), 0.01f, 0.01f, 0.1f, 0.1f);
+            buttonRec.draw(shader.getId(), -0.8f, -0.8f, -0.6f, -0.6f);
             // button.draw(shader);
         }
 
