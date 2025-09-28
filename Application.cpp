@@ -68,8 +68,8 @@ int Application::run() {
     TextureRectangle backgroundRec(imgWidth, imgHeight, img);
     Texture backgroundTexture(image);
 
-    TextureRectangle buttonRec(imgWidth, imgHeight, img);
     Image buttonImage("reset.png");
+    TextureRectangle buttonRec(imgWidth, imgHeight, img);
     Button button(0.1f, 0.1f, 0.01f, 0.01f, buttonImage);
     // Texture buttonTexture(buttonImage);
     
