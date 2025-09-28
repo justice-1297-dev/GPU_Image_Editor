@@ -12,14 +12,7 @@
 #include <iostream>
 namespace csci3081 {
 
-Button::Button(float x, float y, float w, float h, const Image& image){
-    float aspect = 1.0f*buttonImgWidth/buttonImgHeight;
-    buttonX = 0.01;
-    buttonY = 0.01;
-    buttonWidth = 0.1;
-    buttonHeight = 0.1*aspect;
-    buttonHighlighted = false;
-    buttonClicked = false;
+Button::Button(float x, float y, float w, float h, const Image& image) : Glyph(x, y, w, h, image, new ShaderProgram("src/shaders/quad.vsh", "src/shaders/button.fsh")) {
 }
 
 // Button::Button(int buttonImgWidth, int buttonImgHeight){
