@@ -10,7 +10,7 @@ public:
     // int width, int height, unsigned char* img
     ~TextureRectangle();
 
-    void draw(unsigned int shaderProgram, float x, float y, float w, float h);
+    void draw(unsigned int shaderProgram);
 private:
     unsigned int VBO, VAO, EBO;
     // float vertices[12] = {

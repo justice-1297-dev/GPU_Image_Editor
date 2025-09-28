@@ -30,6 +30,7 @@ void Texture::use(unsigned int shaderProgram){
 void Texture::copyToGPU(const Image& image){
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.getWidth(), image.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getData());
+    glGenerateMipmap(GL_TEXTURE_2D);
 }
 
 }
