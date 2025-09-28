@@ -29,10 +29,11 @@ Application::Application(){
     windowHeight = 600;
     buttonX = 0.01f;
     buttonY = 0.01f;
-    buttonWidth = 0.05f;
-    buttonHeight = 0.05f;
+    buttonWidth = 0.1f;
+    buttonHeight = 0.1f;
     buttonHighlighted = false;
     buttonClicked = false;
+    button = nullptr;
 }
 
 Application::~Application(){
@@ -69,16 +70,17 @@ int Application::run() {
     Texture backgroundTexture(image);
 
     Image buttonImage("reset.png");
-    const float buttonScale = 0.2; 
+    const float buttonScale = 0.2f;
     const float buttonAspect = static_cast<float>(buttonImage.getHeight()) /
                                static_cast<float>(buttonImage.getWidth());
     const float buttonWidthNorm = buttonScale;
     const float buttonHeightNorm = buttonScale * buttonAspect;
-    Button button(0.1f, 0.1f, buttonWidthNorm, buttonHeightNorm, buttonImage);
-    buttonX = 0.01f;
-    buttonY = 0.01f;
-    buttonWidth = buttonWidthNorm;
-    buttonHeight = buttonHeightNorm;
+    Button resetButton(0.05f, 0.05f, buttonWidthNorm, buttonHeightNorm, buttonImage);
+    button = &resetButton;
+    buttonX = resetButton.getX();
+    buttonY = resetButton.getY();
+    buttonWidth = resetButton.getWidthNorm();
+    buttonHeight = resetButton.getHeightNorm();
     // Texture buttonTexture(buttonImage);
     
     appWindow.set();
@@ -131,8 +133,8 @@ int Application::run() {
             // Draw button using the Texture Rectangle defined above
             // -------------------------------------
             // buttonRec.draw(shader.getId(), -0.8f, -0.8f, -0.6f, -0.6f);
-            button.setHighlighted(buttonHighlighted);
-            button.draw();
+            resetButton.setHighlighted(buttonHighlighted);
+            resetButton.draw();
         }
 
         // -------------------------------------

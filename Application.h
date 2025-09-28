@@ -25,7 +25,6 @@ public:
     int imgWidth;
     int imgHeight;
     unsigned char* img;
-    Button* button = nullptr;
 };
 
 }
