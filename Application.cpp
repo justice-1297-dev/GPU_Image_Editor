@@ -71,7 +71,7 @@ int Application::run() {
     TextureRectangle buttonRec;
 
     Texture backgroundTexture(image);
-    Button button(0.01f, 0.01f, 0.1f, 0.1f, buttonImage);
+    Button button(0.1f, 0.1f * aspect, 0.01f, 0.01f, buttonImage);
 
     Texture buttonTexture(buttonImage);
     
