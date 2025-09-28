@@ -9,7 +9,7 @@ class Texture {
 public:
     Texture(const Image& image);
     ~Texture();
-    void use(unsigned int shaderProgram);
+    void use(unsigned int shaderProgram, int unit);
     void copyToGPU(const Image& image);
 
 private:
