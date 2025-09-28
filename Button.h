@@ -15,7 +15,7 @@ public:
     int getWidth() const { return buttonImgWidth; }
     int getHeight() const { return buttonImgHeight; }
     unsigned char* getImg() const { return buttonImg; }
-    void draw(const ShaderProgram& shader) const;
+    void draw() const;
     bool contains(float buttonX, float buttonY);
     void setHighlighted(bool highlighted) { this->buttonHighlighted = highlighted; }
     void setClicked(bool clicked) { this->buttonClicked = clicked; }
