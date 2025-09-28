@@ -111,7 +111,7 @@ int Application::run() {
             // -------------------------------------
             // Draw the Texture Rectangle defined above
             // -------------------------------------
-            backgroundRec.draw(shader.getId(), -1.0f, -1.0f, 1.0f, 1.0f);
+            backgroundRec.draw(shader.getId());
             // button.draw(shader);
 
             // -------------------------------------
