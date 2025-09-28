@@ -5,10 +5,10 @@ namespace csci3081{
 
 class TextureRectangle {
 public:
-    TextureRectangle();
+    TextureRectangle(int width, int height, unsigned char* img);
     // int width, int height, unsigned char* img
     ~TextureRectangle();
-    
+
     void draw(unsigned int shaderProgram, float x, float y, float w, float h);
 private:
     unsigned int VBO, VAO, EBO;
