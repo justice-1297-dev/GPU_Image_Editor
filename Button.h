@@ -8,7 +8,7 @@
 
 namespace csci3081{
 
-class Button {
+class Button : public Glyph {
 public:
     Button(float x, float y, float w, float h, const Image& image);
 
