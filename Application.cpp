@@ -72,7 +72,7 @@ int Application::run() {
 
     Texture backgroundTexture(image);
 
-    Button button(0.1f, 0.1f * aspect, 0.01f, 0.01f, buttonImage);
+    Button button(0.1f, 0.1f, 0.01f, 0.01f, buttonImage);
     Texture buttonTexture(buttonImage);
     
     appWindow.set();
