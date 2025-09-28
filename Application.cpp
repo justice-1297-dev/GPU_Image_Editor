@@ -76,7 +76,7 @@ int Application::run() {
     Texture buttonTexture(buttonImage);
     
     appWindow.set();
-
+    backgroundTexture.copyToGPU(image);
     while(!glfwWindowShouldClose(appWindow.getWindow()))
     {
         // -------------------------------------
@@ -89,7 +89,7 @@ int Application::run() {
         // -------------------------------------
         // Copy background image data to the texture
         // -------------------------------------
-        backgroundTexture.copyToGPU(image);
+        // backgroundTexture.copyToGPU(image);
 
         // -------------------------------------
         // Render Graphics
