@@ -35,7 +35,7 @@ build/Button.o: Button.cpp Button.h
 
 build/Glyph.o: Glyph.cpp Glyph.h
 	mkdir -p build
-	g++ -I. -Ilib -c Glyph.cpp -o Glyph/Button.o
+	g++ -I. -Ilib -c Glyph.cpp -o build/Glyph.o
 
 build/glad.o: lib/glad/glad.c 
 	mkdir -p build
