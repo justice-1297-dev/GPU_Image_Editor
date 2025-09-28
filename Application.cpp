@@ -25,8 +25,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 Application::Application(){
-    windowWidth = 800;
-    windowHeight = 600;
+    // windowWidth = 800;
+    // windowHeight = 600;
 }
 
 Application::~Application(){
