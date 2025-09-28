@@ -41,6 +41,9 @@ Application::~Application(){
 
 int Application::run() {
     Image image("img_small.jpeg");
+    img = image.getData();
+    imgWidth = image.getWidth();
+    imgHeight = image.getHeight();
     
     Image buttonImage("reset.png");
 
