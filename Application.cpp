@@ -44,8 +44,6 @@ int Application::run() {
     img = const_cast<unsigned char*>(image.getData());
     imgWidth = image.getWidth();
     imgHeight = image.getHeight();
-    
-    Image buttonImage("reset.png");
 
     Window appWindow(windowWidth, windowHeight);
     if (appWindow.getWindow() == NULL)
@@ -65,13 +63,13 @@ int Application::run() {
     }
     glfwSetWindowUserPointer(appWindow.getWindow(), this);
 
-    ShaderProgram shader("src/shaders/quad.vsh", "src/shaders/button.fsh");
+    // ShaderProgram shader("src/shaders/quad.vsh", "src/shaders/button.fsh");
 
     TextureRectangle backgroundRec;
-    TextureRectangle buttonRec;
-
     Texture backgroundTexture(image);
 
+    TextureRectangle buttonRec;
+    Image buttonImage("reset.png");
     Button button(0.1f, 0.1f, 0.01f, 0.01f, buttonImage);
     // Texture buttonTexture(buttonImage);
     
