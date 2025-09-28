@@ -73,7 +73,7 @@ int Application::run() {
     Texture backgroundTexture(image);
 
     Button button(0.1f, 0.1f, 0.01f, 0.01f, buttonImage);
-    Texture buttonTexture(buttonImage);
+    // Texture buttonTexture(buttonImage);
     
     appWindow.set();
 
@@ -119,7 +119,7 @@ int Application::run() {
             // -------------------------------------
             // Use the button texture defined above
             // -------------------------------------
-            buttonTexture.use(shader.getId());
+            // buttonTexture.use(shader.getId());
 
             // -------------------------------------
             // Draw button using the Texture Rectangle defined above
