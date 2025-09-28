@@ -14,7 +14,7 @@ public:
     virtual ~Glyph();
 
     void update(const Image& image);
-    virtual void draw();
+    void draw();
 
     Glyph(const Glyph& glyph) = delete;
     Glyph& operator=(const Glyph& glyph) = delete;
