@@ -27,8 +27,8 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 Application::Application(){
     windowWidth = 800;
     windowHeight = 600;
-    buttonX = 0.01f;
-    buttonY = 0.01f;
+    buttonX = 0.1f;
+    buttonY = 0.1f;
     buttonWidth = 0.1f;
     buttonHeight = 0.1f;
     buttonHighlighted = false;
