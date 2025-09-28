@@ -68,7 +68,7 @@ float vertices[] = {
         1.0f, 1.0f, 1.0f, 1.0f,
         0.0f, 1.0f, 0.0f, 1.0f
     };
-    unsigned int indices[] = { 0, 1, 2, 0, 2, 3 };
+    unsigned int indices[] = { 0, 1, 3, 1, 2, 3 };
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
