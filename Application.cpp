@@ -41,7 +41,7 @@ Application::~Application(){
 
 int Application::run() {
     Image image("img_small.jpeg");
-    img = image.getData();
+    img = const_cast<unsigned char*>(image.getData());
     imgWidth = image.getWidth();
     imgHeight = image.getHeight();
     
