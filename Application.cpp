@@ -123,7 +123,7 @@ int Application::run() {
             // Draw button using the Texture Rectangle defined above
             // -------------------------------------
             // buttonRec.draw(shader.getId(), -0.8f, -0.8f, -0.6f, -0.6f);
-            button.draw(shader);
+            button.draw();
         }
 
         // -------------------------------------
