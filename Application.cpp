@@ -99,13 +99,13 @@ int Application::run() {
             // -------------------------------------
             // Use the texture defined above
             // -------------------------------------
-            // backgroundTexture.use(shader.getId());
+            backgroundTexture.use(shader.getId());
 
             // -------------------------------------
             // Draw the Texture Rectangle defined above
             // -------------------------------------
-            // texRec.draw(shader.getId());
-            button.draw(shader);
+            texRec.draw(shader.getId(), 0.0f, 0.0f, 1.0f, 1.0f);
+            // button.draw(shader);
 
             // -------------------------------------
             // Use the button texture defined above
@@ -115,7 +115,8 @@ int Application::run() {
             // -------------------------------------
             // Draw button using the Texture Rectangle defined above
             // -------------------------------------
-            // texRec.draw(shader.getId());
+            texRec.draw(shader.getId(), 0.01f, 0.01f, 0.1f, 0.1f);
+            // button.draw(shader);
         }
 
         // -------------------------------------
