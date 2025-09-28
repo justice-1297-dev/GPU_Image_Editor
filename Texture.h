@@ -14,6 +14,7 @@ public:
 
 private:
     unsigned int texture;
+    int unit;
 };
 
 }
