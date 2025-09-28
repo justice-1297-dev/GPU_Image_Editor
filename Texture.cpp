@@ -25,7 +25,7 @@ void Texture::use(unsigned int shaderProgram){
     glBindTexture(GL_TEXTURE_2D, texture);
     int texLoc = glGetUniformLocation(shaderProgram, "tex");
     glUniform1i(texLoc, 0);
-// }
+}
 
 void Texture::copyToGPU(const Image& image){
     glBindTexture(GL_TEXTURE_2D, texture);
