@@ -61,7 +61,6 @@ int Application::run() {
     TextureRectangle texRec;
 
     Texture backgroundTexture(image);
-    
     Button button(0.01f, 0.01f, 0.1f, 0.1f, buttonImage);
 
     Texture buttonTexture(buttonImage);
