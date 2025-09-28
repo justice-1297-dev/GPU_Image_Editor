@@ -108,7 +108,9 @@ int Application::run() {
             // -------------------------------------
             // Use the texture defined above
             // -------------------------------------
+            glActiveTexture(GL_TEXTURE0);
             backgroundTexture.use(shader.getId());
+            glUniform1i(glGetUniformLocation(shader.getId(), "tex"), 0);
 
             // -------------------------------------
             // Draw the Texture Rectangle defined above
