@@ -65,10 +65,10 @@ int Application::run() {
 
     ShaderProgram shader("src/shaders/quad.vsh", "src/shaders/button.fsh");
 
-    // TextureRectangle backgroundRec;
+    TextureRectangle backgroundRec;
     Texture backgroundTexture(image);
 
-    // TextureRectangle buttonRec;
+    TextureRectangle buttonRec;
     Image buttonImage("reset.png");
     Button button(0.1f, 0.1f, 0.01f, 0.01f, buttonImage);
     // Texture buttonTexture(buttonImage);
@@ -111,7 +111,7 @@ int Application::run() {
             // -------------------------------------
             // Draw the Texture Rectangle defined above
             // -------------------------------------
-            backgroundRec.draw(shader.getId(), 0.0f, 0.0f, 1.0f, 1.0f);
+            backgroundRec.draw(shader.getId(), -1.0f, -1.0f, 1.0f, 1.0f);
             // button.draw(shader);
 
             // -------------------------------------
