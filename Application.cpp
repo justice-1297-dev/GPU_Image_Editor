@@ -70,7 +70,7 @@ int Application::run() {
 
     Image buttonImage("reset.png");
     TextureRectangle buttonRec(imgWidth, imgHeight, img);
-    Button button(0.1f, 0.1f, 0.01f, 0.01f, buttonImage);
+    Button button(0.2f, 0.2f, 0.05f, 0.05f, buttonImage);
     // Texture buttonTexture(buttonImage);
     
     appWindow.set();
@@ -123,6 +123,7 @@ int Application::run() {
             // Draw button using the Texture Rectangle defined above
             // -------------------------------------
             // buttonRec.draw(shader.getId(), -0.8f, -0.8f, -0.6f, -0.6f);
+            button.setHighlighted(buttonHighlighted);
             button.draw();
         }
 
