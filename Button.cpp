@@ -12,8 +12,10 @@
 #include <iostream>
 namespace csci3081 {
 
-Button::Button(float x, float y, float w, float h, const Image& image) : Glyph(x, y, w, h, image, new ShaderProgram("src/shaders/quad.vsh", "src/shaders/button.fsh")) {
-}
+// Button::Button(float x, float y, float w, float h, const Image& image) : Glyph(x, y, w, h, image, new ShaderProgram("src/shaders/quad.vsh", "src/shaders/button.fsh")) {
+// }
+Button::Button(float x, float y, float w, float h, const Image& image, ShaderProgram* shaderProgram)
+    : Glyph(x, y, w, h, image, shaderProgram) {}
 
 // Button::Button(int buttonImgWidth, int buttonImgHeight){
 //     float aspect = 1.0f*buttonImgWidth/buttonImgHeight;
@@ -77,7 +79,6 @@ void Button::draw() {
     shaderProgram.use();
     int buttonHighlightLoc = glGetUniformLocation(shaderProgram.getId(), "highlight");
     glUniform1i(buttonHighlightLoc, buttonHighlighted && !buttonClicked);
-    texture.use(shaderProgram.getId());
 
     Glyph::draw();
 }
