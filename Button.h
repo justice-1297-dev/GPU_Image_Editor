@@ -4,6 +4,7 @@
 #include <string>
 #include "Image.h"
 #include "ShaderProgram.h"
+#include "Glyph.h"
 
 namespace csci3081{
 
