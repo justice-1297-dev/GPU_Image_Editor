@@ -65,7 +65,7 @@ int Application::run() {
 
     ShaderProgram shader("src/shaders/quad.vsh", "src/shaders/button.fsh");
 
-    TextureRectangle backgroundRec;
+    TextureRectangle backgroundRec(imgWidth, imgHeight, img);
     Texture backgroundTexture(image);
 
     TextureRectangle buttonRec;
