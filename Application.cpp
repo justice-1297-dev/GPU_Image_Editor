@@ -63,12 +63,12 @@ int Application::run() {
     }
     glfwSetWindowUserPointer(appWindow.getWindow(), this);
 
-    // ShaderProgram shader("src/shaders/quad.vsh", "src/shaders/button.fsh");
+    ShaderProgram shader("src/shaders/quad.vsh", "src/shaders/button.fsh");
 
-    TextureRectangle backgroundRec;
+    // TextureRectangle backgroundRec;
     Texture backgroundTexture(image);
 
-    TextureRectangle buttonRec;
+    // TextureRectangle buttonRec;
     Image buttonImage("reset.png");
     Button button(0.1f, 0.1f, 0.01f, 0.01f, buttonImage);
     // Texture buttonTexture(buttonImage);
