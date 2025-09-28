@@ -45,7 +45,7 @@ void Button::draw(const ShaderProgram& shader) const{
     // int buttonHighlightLoc = glGetUniformLocation(shaderProgram.getId(), "highlight");
     // glUniform1i(buttonHighlightLoc, buttonHighlighted && !buttonClicked);
     // Glyph::draw();
-    shaderProgram.use();
+    shader.use();
     int buttonHighlightLoc = glGetUniformLocation(shader.getId(), "highlight");
     glUniform1i(buttonHighlightLoc, buttonHighlighted && !buttonClicked);
 

@@ -31,6 +31,7 @@ private:
 
     bool buttonHighlighted = false;
     bool buttonClicked = false;
+    unsigned int textureID;
 };
 
 }
