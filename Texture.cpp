@@ -20,19 +20,12 @@ Texture::~Texture(){
     glDeleteTextures(1, &texture);
 }
 
-// void Texture::use(unsigned int shaderProgram){
-//     glActiveTexture(GL_TEXTURE0);
-//     glBindTexture(GL_TEXTURE_2D, texture);
-//     int texLoc = glGetUniformLocation(shaderProgram, "tex");
-//     glUniform1i(texLoc, 0);
-// }
-
-void Texture::use(unsigned int shaderProgram, int unit){
-    glActiveTexture(GL_TEXTURE0 + unit);
+void Texture::use(unsigned int shaderProgram){
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
     int texLoc = glGetUniformLocation(shaderProgram, "tex");
-    glUniform1i(texLoc, unit);
-}
+    glUniform1i(texLoc, 0);
+// }
 
 void Texture::copyToGPU(const Image& image){
     glBindTexture(GL_TEXTURE_2D, texture);
