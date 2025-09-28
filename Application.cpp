@@ -69,8 +69,16 @@ int Application::run() {
     Texture backgroundTexture(image);
 
     Image buttonImage("reset.png");
-    TextureRectangle buttonRec(imgWidth, imgHeight, img);
-    Button button(0.2f, 0.2f, 0.05f, 0.05f, buttonImage);
+    const float buttonScale = 0.15f; 
+    const float buttonAspect = static_cast<float>(buttonImage.getHeight()) /
+                               static_cast<float>(buttonImage.getWidth());
+    const float buttonWidthNorm = buttonScale;
+    const float buttonHeightNorm = buttonScale * buttonAspect;
+    Button button(0.2f, 0.2f, buttonWidthNorm, buttonHeightNorm, buttonImage);
+    buttonX = 0.2f;
+    buttonY = 0.2f;
+    buttonWidth = buttonWidthNorm;
+    buttonHeight = buttonHeightNorm;
     // Texture buttonTexture(buttonImage);
     
     appWindow.set();
