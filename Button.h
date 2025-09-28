@@ -22,12 +22,12 @@ public:
     bool isHighlighted() { return buttonHighlighted; }
 
 private:
-    int buttonWidth;
-    int buttonHeight;
+    int buttonWidth = 0.01;
+    int buttonHeight = 0.01;
     unsigned char* buttonImg;
     int buttonImgWidth, buttonImgHeight, buttonImgChannels;
-    float buttonX;
-    float buttonY;
+    float buttonX = 0.01;
+    float buttonY = 0.01;
 
     bool buttonHighlighted = false;
     bool buttonClicked = false;
