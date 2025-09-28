@@ -77,6 +77,8 @@ void Button::draw() {
     shaderProgram.use();
     int buttonHighlightLoc = glGetUniformLocation(shaderProgram.getId(), "highlight");
     glUniform1i(buttonHighlightLoc, buttonHighlighted && !buttonClicked);
+    texture.use(shaderProgram.getId());
+
     Glyph::draw();
 }
 
