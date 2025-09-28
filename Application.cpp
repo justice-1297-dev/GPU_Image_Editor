@@ -69,7 +69,7 @@ int Application::run() {
     Texture backgroundTexture(image);
 
     Image buttonImage("reset.png");
-    const float buttonScale = 0.5; 
+    const float buttonScale = 0.2; 
     const float buttonAspect = static_cast<float>(buttonImage.getHeight()) /
                                static_cast<float>(buttonImage.getWidth());
     const float buttonWidthNorm = buttonScale;
