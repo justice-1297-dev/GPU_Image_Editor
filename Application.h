@@ -3,6 +3,7 @@
 
 #include "Button.h"
 
+
 namespace csci3081{
 
 class Application{
@@ -25,6 +26,8 @@ public:
     int imgWidth;
     int imgHeight;
     unsigned char* img;
+
+    Image original;
 };
 
 }
