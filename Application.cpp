@@ -90,8 +90,8 @@ int Application::run() {
 
     Button filterButton(0.01f, 0.25f, filterButtonWidthNorm, filterButtonHeightNorm, filterImage);
 
-    filterButtonX = 0.25f;
-    filterButtonY = 0.01f;
+    filterButtonX = 0.01f;
+    filterButtonY = 0.25f;
     filterButtonWidth = filterButtonWidthNorm;
     filterButtonHeight = filterButtonHeightNorm;
     
