@@ -222,7 +222,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
             std::cout << "Clicked" << std::endl;
             app.buttonClicked = true;
 
-            std::copy(original.getData(), original.getData() + app.imgWidth * app.imgHeight * 4, app.img);
+            std::copy(app.original.getData(), app.original.getData() + app.imgWidth * app.imgHeight * 4, app.img);
             app.drawing = false;
         }
         else {
