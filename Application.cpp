@@ -147,6 +147,9 @@ int Application::run() {
             // buttonRec.draw(shader.getId(), -0.8f, -0.8f, -0.6f, -0.6f);
             button.setHighlighted(buttonHighlighted);
             button.draw();
+
+            filterButton.setHighlighted(filterButtonHighlighted);
+            filterButton.draw();
         }
 
         // -------------------------------------
