@@ -41,6 +41,7 @@ Application::~Application(){
 
 int Application::run() {
     Image image("img_small.jpeg");
+    Image original(image);
     img = const_cast<unsigned char*>(image.getData());
     imgWidth = image.getWidth();
     imgHeight = image.getHeight();
@@ -220,6 +221,11 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
         if (app.buttonHighlighted) {
             std::cout << "Clicked" << std::endl;
             app.buttonClicked = true;
+
+            std::copy(original.getData(),
+              original.getData() + app.imgWidth * app.imgHeight * 4,
+              app.img);
+            app.drawing = false;
         }
         else {
             app.drawing = true;
