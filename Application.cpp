@@ -8,18 +8,14 @@
 
 #include <iostream>
 
-// Include glad and glfw for graphics and windowing
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-// Include stb_image for image loading
-// #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
 
 namespace csci3081{
 
-// Prototypes for user interaction
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
@@ -99,52 +95,20 @@ int Application::run() {
 
     while(!glfwWindowShouldClose(appWindow.getWindow()))
     {
-        // -------------------------------------
-        // Process window input (e.g. mouse movement, clicks, resize, etc...)
-        // -------------------------------------
-        // If the escape key is pressed, close the window
         if(glfwGetKey(appWindow.getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
             glfwSetWindowShouldClose(appWindow.getWindow(), true);
 
-        // -------------------------------------
-        // Copy background image data to the texture
-        // -------------------------------------
         backgroundTexture.copyToGPU(image);
 
-        // -------------------------------------
-        // Render Graphics
-        // -------------------------------------
         {
-            // Clear the screen
-            // keep
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            // -------------------------------------
-            // Use the shader program defined above
-            // -------------------------------------
             shader.use();
             
-            // -------------------------------------
-            // Use the texture defined above
-            // -------------------------------------
             backgroundTexture.use(shader.getId());
-
-            // -------------------------------------
-            // Draw the Texture Rectangle defined above
-            // -------------------------------------
             backgroundRec.draw(shader.getId());
-            // button.draw(shader);
 
-            // -------------------------------------
-            // Use the button texture defined above
-            // -------------------------------------
-            // buttonTexture.use(shader.getId());
-
-            // -------------------------------------
-            // Draw button using the Texture Rectangle defined above
-            // -------------------------------------
-            // buttonRec.draw(shader.getId(), -0.8f, -0.8f, -0.6f, -0.6f);
             button.setHighlighted(buttonHighlighted);
             button.draw();
 
@@ -152,14 +116,8 @@ int Application::run() {
             filterButton.draw();
         }
 
-        // -------------------------------------
-        // Show window on the screen
-        // -------------------------------------
         appWindow.swapBuffers();
 
-        // -------------------------------------
-        // Check for user input (mouse movement, clicks, keyboard, etc...)
-        // -------------------------------------
         appWindow.pollEvents();
     }
     return 0;
@@ -167,14 +125,8 @@ int Application::run() {
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
-    // -------------------------------------
-    // Get the applicaiton
-    // -------------------------------------
     Application& app = *static_cast<Application*>(glfwGetWindowUserPointer(window));
 
-    // -------------------------------------
-    // If the mouse is over the button, highlight it
-    // -------------------------------------
     float x = xpos/app.windowWidth;
     float y = ypos/app.windowHeight;
     if (x >= app.buttonX && x <= app.buttonX + app.buttonWidth && y >= app.buttonY && y <= app.buttonY + app.buttonHeight ) {
@@ -190,9 +142,6 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
         app.filterButtonHighlighted = false;
     }
 
-    // -------------------------------------
-    // If we are drawing, edit the background image
-    // -------------------------------------
     if (app.drawing) {
         std::cout << x << " " << y << std::endl;
         int imgX = x * app.imgWidth;
@@ -213,33 +162,19 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-    // -------------------------------------
-    // Set the window drawing area
-    // -------------------------------------
     glViewport(0, 0, width, height);
 
-    
-    // -------------------------------------
-    // Get the applicaiton
-    // -------------------------------------
     Application& app = *static_cast<Application*>(glfwGetWindowUserPointer(window));
     app.windowWidth = width;
     app.windowHeight = height;
 
-    // -------------------------------------
-    // update the button height
-    // -------------------------------------
     float aspect = 1.0f*width/height;
     app.buttonHeight = 0.1*aspect;
 }
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
-    // -------------------------------------
-    // handle button presses and drawing
-    // -------------------------------------
     Application& app = *static_cast<Application*>(glfwGetWindowUserPointer(window));
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-        // Application& app = *static_cast<Application*>(glfwGetWindowUserPointer(window));
         if (app.buttonHighlighted) {
             std::cout << "Clicked" << std::endl;
             app.buttonClicked = true;
