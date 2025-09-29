@@ -1,6 +1,5 @@
 #include "Texture.h"
 
-// Include glad and glfw for graphics and windowing
 #include <glad/glad.h>
 
 namespace csci3081{

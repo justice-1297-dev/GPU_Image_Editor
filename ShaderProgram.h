@@ -2,8 +2,6 @@
 #ifndef SHADERPROGRAM_H
 #define SHADERPROGRAM_H
 
-
-
 namespace csci3081{
 
 class ShaderProgram {

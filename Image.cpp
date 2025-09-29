@@ -38,10 +38,7 @@ Image::Image(const Image& img){
 }
 
 Image::~Image() {
-    // delete[] img;
-    // stbi_image_free(img);
     delete[] pixels;
-    // stbi_image_free(buttonImg);
 }
 
 void Image::operator=(const Image& image) {

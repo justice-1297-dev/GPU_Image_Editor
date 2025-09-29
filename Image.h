@@ -8,20 +8,14 @@ namespace csci3081 {
 
 class Image {
 public:
-    // constructors
     Image();
     Image(const std::string& filename);
     Image(int width, int height);
 
-    // copy constructor
     Image(const Image& img);
 
-    // Destructor
     ~Image();
-
-    //assignement operator
-
-    // methods
+    
     void saveAs(const std::string& filename) const;
     int getWidth() const;
     int getHeight() const;
