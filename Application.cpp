@@ -74,7 +74,7 @@ int Application::run() {
                                static_cast<float>(buttonImage.getWidth());
     const float buttonWidthNorm = buttonScale;
     const float buttonHeightNorm = buttonScale * buttonAspect;
-    Button button(0.1f, 0.1f, buttonWidthNorm, buttonHeightNorm, buttonImage);
+    Button button(0.01f, 0.01f, buttonWidthNorm, buttonHeightNorm, buttonImage);
     buttonX = 0.01f;
     buttonY = 0.01f;
     buttonWidth = buttonWidthNorm;
