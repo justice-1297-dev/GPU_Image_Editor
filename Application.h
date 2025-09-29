@@ -28,6 +28,8 @@ public:
     unsigned char* img;
 
     Image original;
+    float filterButtonX, filterButtonY, filterButtonWidth, filterButtonHeight;
+    bool filterButtonHighlighted, filterButtonClicked;
 };
 
 }

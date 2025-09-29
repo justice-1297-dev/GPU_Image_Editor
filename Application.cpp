@@ -80,7 +80,20 @@ int Application::run() {
     buttonY = 0.01f;
     buttonWidth = buttonWidthNorm;
     buttonHeight = buttonHeightNorm;
-    // Texture buttonTexture(buttonImage);
+
+    Image filterImage("grayscale.png");
+    const float filterButtonScale = 0.2;
+    const float filterButtonAspect = static_cast<float>(filterImage.getHeight()) /
+                                    static_cast<float>(filterImage.getWidth());
+    const float filterButtonWidthNorm = filterButtonScale;
+    const float filterButtonHeightNorm = filterButtonScale * filterButtonAspect;
+
+    Button filterButton(0.01f, 0.25f, filterButtonWidthNorm, filterButtonHeightNorm, filterImage);
+
+    filterButtonX = 0.25f;
+    filterButtonY = 0.01f;
+    filterButtonWidth = filterButtonWidthNorm;
+    filterButtonHeight = filterButtonHeightNorm;
     
     appWindow.set();
 
@@ -168,6 +181,12 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
         app.buttonHighlighted = false;
     }
 
+    if (x >= app.filterButtonX && x <= app.filterButtonX + app.filterButtonWidth && y >= app.filterButtonY && y <= app.filterButtonY + app.filterButtonHeight) {
+        app.filterButtonHighlighted = true;
+    } else {
+        app.filterButtonHighlighted = false;
+    }
+
     // -------------------------------------
     // If we are drawing, edit the background image
     // -------------------------------------
@@ -227,6 +246,23 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
         }
         else {
             app.drawing = true;
+        }
+
+        if (app.filterButtonHighlighted) {
+            std::cout << "Filter button clicked" << std::endl;
+            app.filterButtonClicked = true;
+
+            for (int i = 0; i < app.imgWidth * app.imgHeight; i++) {
+                unsigned char r = app.img[i*4 + 0];
+                unsigned char g = app.img[i*4 + 1];
+                unsigned char b = app.img[i*4 + 2];
+                unsigned char gray = static_cast<unsigned char>(0.3*r + 0.59*g + 0.11*b);
+
+                app.img[i*4 + 0] = gray;
+                app.img[i*4 + 1] = gray;
+                app.img[i*4 + 2] = gray;
+            }
+            app.drawing = false;
         }
     }
     if (action == GLFW_RELEASE) {
