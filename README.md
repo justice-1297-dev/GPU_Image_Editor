@@ -1,3 +1,5 @@
+![](GPUImage.png)
+
 # GPU Image Editor
 
 Personal playground for experimenting with a GPU-accelerated 2D image editor.  
