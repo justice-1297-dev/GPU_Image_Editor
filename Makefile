@@ -1,45 +1,45 @@
 build/ImageEditor: build/main.o build/glad.o build/Application.o build/Texture.o build/Image.o build/TextureRectangle.o build/ShaderProgram.o build/Window.o build/Button.o build/Glyph.o build/Quad.o
 	g++ build/main.o build/glad.o build/Application.o build/Texture.o build/Image.o build/TextureRectangle.o build/ShaderProgram.o build/Window.o build/Button.o build/Glyph.o build/Quad.o -o build/ImageEditor /usr/lib/x86_64-linux-gnu/libglfw.so.3.3
 
-build/main.o: main.cpp
+build/main.o: src/main.cpp
 	mkdir -p build
-	g++ -I. -Ilib -c main.cpp -o build/main.o
+	g++ -I. -Ilib -c scr/main.cpp -o build/main.o
 
-build/Application.o: Application.cpp Application.h
+build/Application.o: src/Application.cpp include/Application.h
 	mkdir -p build
-	g++ -I. -Ilib -c Application.cpp -o build/Application.o
+	g++ -I. -Ilib -c src/Application.cpp -o build/Application.o
 
-build/Texture.o: Texture.cpp Texture.h
+build/Texture.o: src/Texture.cpp include/Texture.h
 	mkdir -p build
-	g++ -I. -Ilib -c Texture.cpp -o build/Texture.o
+	g++ -I. -Ilib -c src/Texture.cpp -o build/Texture.o
 
-build/Image.o: Image.cpp Image.h
+build/Image.o: src/Image.cpp include/Image.h
 	mkdir -p build
-	g++ -I. -Ilib -c Image.cpp -o build/Image.o
+	g++ -I. -Ilib -c src/Image.cpp -o build/Image.o
 
-build/TextureRectangle.o: TextureRectangle.cpp TextureRectangle.h
+build/TextureRectangle.o: src/TextureRectangle.cpp include/TextureRectangle.h
 	mkdir -p build
-	g++ -I. -Ilib -c TextureRectangle.cpp -o build/TextureRectangle.o
+	g++ -I. -Ilib -c src/TextureRectangle.cpp -o build/TextureRectangle.o
 
-build/ShaderProgram.o: ShaderProgram.cpp ShaderProgram.h
+build/ShaderProgram.o: src/ShaderProgram.cpp include/ShaderProgram.h
 	mkdir -p build
-	g++ -I. -Ilib -c ShaderProgram.cpp -o build/ShaderProgram.o
+	g++ -I. -Ilib -c src/ShaderProgram.cpp -o build/ShaderProgram.o
 
-build/Window.o: Window.cpp Window.h
+build/Window.o: src/Window.cpp include/Window.h
 	mkdir -p build
-	g++ -I. -Ilib -c Window.cpp -o build/Window.o
+	g++ -I. -Ilib -c src/Window.cpp -o build/Window.o
 
-build/Button.o: Button.cpp Button.h
+build/Button.o: src/Button.cpp include/Button.h
 	mkdir -p build
-	g++ -I. -Ilib -c Button.cpp -o build/Button.o
+	g++ -I. -Ilib -c src/Button.cpp -o build/Button.o
 
-build/Glyph.o: Glyph.cpp Glyph.h
+build/Glyph.o: src/Glyph.cpp include/Glyph.h
 	mkdir -p build
-	g++ -I. -Ilib -c Glyph.cpp -o build/Glyph.o
+	g++ -I. -Ilib -c src/Glyph.cpp -o build/Glyph.o
 
-build/Quad.o: Quad.cpp Quad.h
+build/Quad.o: src/Quad.cpp include/Quad.h
 	mkdir -p build
-	g++ -I. -Ilib -c Quad.cpp -o build/Quad.o
+	g++ -I. -Ilib -c src/Quad.cpp -o build/Quad.o
 
 build/glad.o: lib/glad/glad.c 
 	mkdir -p build

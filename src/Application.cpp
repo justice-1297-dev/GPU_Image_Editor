@@ -1,0 +1,226 @@
+#include "Application.h"
+#include "Texture.h"
+#include "Image.h"
+#include "TextureRectangle.h"
+#include "ShaderProgram.h"
+#include "Window.h"
+#include "Button.h"
+
+#include <iostream>
+
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+#include <stb_image.h>
+
+
+namespace csci3081{
+
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+
+Application::Application(){
+    windowWidth = 800;
+    windowHeight = 600;
+    buttonX = 0.1f;
+    buttonY = 0.1f;
+    buttonWidth = 0.05f;
+    buttonHeight = 0.05f;
+    buttonHighlighted = false;
+    buttonClicked = false;
+}
+
+Application::~Application(){
+    glfwTerminate();
+}
+
+int Application::run() {
+    Image image("img_small.jpeg");
+    original = image;
+    img = const_cast<unsigned char*>(image.getData());
+    imgWidth = image.getWidth();
+    imgHeight = image.getHeight();
+
+    Window appWindow(windowWidth, windowHeight);
+    if (appWindow.getWindow() == NULL)
+    {
+        std::cout << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(appWindow.getWindow());
+    glfwSetFramebufferSizeCallback(appWindow.getWindow(), framebuffer_size_callback);
+    glfwSetCursorPosCallback(appWindow.getWindow(), cursor_position_callback);
+    glfwSetMouseButtonCallback(appWindow.getWindow(), mouse_button_callback);
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        return -1;
+    }
+    glfwSetWindowUserPointer(appWindow.getWindow(), this);
+
+    ShaderProgram shader("src/shaders/quad.vsh", "src/shaders/button.fsh");
+
+    TextureRectangle backgroundRec(imgWidth, imgHeight, img);
+    Texture backgroundTexture(image);
+
+    Image buttonImage("reset.png");
+    const float buttonScale = 0.2; 
+    const float buttonAspect = static_cast<float>(buttonImage.getHeight()) /
+                               static_cast<float>(buttonImage.getWidth());
+    const float buttonWidthNorm = buttonScale;
+    const float buttonHeightNorm = buttonScale * buttonAspect;
+    Button button(0.01f, 0.01f, buttonWidthNorm, buttonHeightNorm, buttonImage);
+    buttonX = 0.01f;
+    buttonY = 0.01f;
+    buttonWidth = buttonWidthNorm;
+    buttonHeight = buttonHeightNorm;
+
+    Image filterImage("grayscale.png");
+    const float filterButtonScale = 0.2;
+    const float filterButtonAspect = static_cast<float>(filterImage.getHeight()) /
+                                    static_cast<float>(filterImage.getWidth());
+    const float filterButtonWidthNorm = filterButtonScale;
+    const float filterButtonHeightNorm = filterButtonScale * filterButtonAspect;
+
+    Button filterButton(0.01f, 0.25f, filterButtonWidthNorm, filterButtonHeightNorm, filterImage);
+
+    filterButtonX = 0.01f;
+    filterButtonY = 0.25f;
+    filterButtonWidth = filterButtonWidthNorm;
+    filterButtonHeight = filterButtonHeightNorm;
+    
+    appWindow.set();
+
+    while(!glfwWindowShouldClose(appWindow.getWindow()))
+    {
+        if(glfwGetKey(appWindow.getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
+            glfwSetWindowShouldClose(appWindow.getWindow(), true);
+
+        backgroundTexture.copyToGPU(image);
+
+        {
+            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
+
+            shader.use();
+            
+            backgroundTexture.use(shader.getId());
+            backgroundRec.draw(shader.getId());
+
+            button.setHighlighted(buttonHighlighted);
+            button.draw();
+
+            filterButton.setHighlighted(filterButtonHighlighted);
+            filterButton.draw();
+        }
+
+        appWindow.swapBuffers();
+
+        appWindow.pollEvents();
+    }
+    return 0;
+}
+
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+{
+    Application& app = *static_cast<Application*>(glfwGetWindowUserPointer(window));
+
+    float x = xpos/app.windowWidth;
+    float y = ypos/app.windowHeight;
+    if (x >= app.buttonX && x <= app.buttonX + app.buttonWidth && y >= app.buttonY && y <= app.buttonY + app.buttonHeight ) {
+        app.buttonHighlighted = true;
+    }
+    else {
+        app.buttonHighlighted = false;
+    }
+
+    if (x >= app.filterButtonX && x <= app.filterButtonX + app.filterButtonWidth && y >= app.filterButtonY && y <= app.filterButtonY + app.filterButtonHeight) {
+        app.filterButtonHighlighted = true;
+    } else {
+        app.filterButtonHighlighted = false;
+    }
+
+    if (app.drawing) {
+        std::cout << x << " " << y << std::endl;
+        int imgX = x * app.imgWidth;
+        int imgY = y * app.imgHeight;
+        int radius = 2;
+        for (int i = imgX-radius; i < imgX+radius+1; i++) {
+            for (int j = imgY-radius; j < imgY + radius+1; j++) {
+                app.img[(j*app.imgWidth + i)*4 + 0] = 0;
+                app.img[(j*app.imgWidth + i)*4 + 1] = 0;
+                app.img[(j*app.imgWidth + i)*4 + 2] = 255;
+                app.img[(j*app.imgWidth + i)*4 + 3] = 255;
+            }
+        }
+    }
+
+    
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+
+    Application& app = *static_cast<Application*>(glfwGetWindowUserPointer(window));
+    app.windowWidth = width;
+    app.windowHeight = height;
+
+    float aspect = 1.0f*width/height;
+    app.buttonHeight = 0.1*aspect;
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+    Application& app = *static_cast<Application*>(glfwGetWindowUserPointer(window));
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+        if (app.buttonHighlighted) {
+            std::cout << "Clicked" << std::endl;
+            app.buttonClicked = true;
+
+            std::copy(app.original.getData(), app.original.getData() + app.imgWidth * app.imgHeight * 4, app.img);
+            app.drawing = false;
+        }
+        else {
+            app.drawing = true;
+        }
+
+        if (app.filterButtonHighlighted) {
+            std::cout << "Filter button clicked" << std::endl;
+            app.filterButtonClicked = true;
+
+            for (int i = 0; i < app.imgWidth * app.imgHeight; i++) {
+                unsigned char r = app.img[i*4 + 0];
+                unsigned char g = app.img[i*4 + 1];
+                unsigned char b = app.img[i*4 + 2];
+                unsigned char gray = static_cast<unsigned char>(0.3*r + 0.59*g + 0.11*b);
+
+                app.img[i*4 + 0] = gray;
+                app.img[i*4 + 1] = gray;
+                app.img[i*4 + 2] = gray;
+            }
+            app.drawing = false;
+        }
+    }
+    if (action == GLFW_RELEASE) {
+        app.buttonClicked = false;
+        app.drawing = false;
+    }
+
+}
+
+unsigned char* load_image(const std::string& fileName, int& width, int& height, int& channels) {
+    
+    unsigned char *img = stbi_load(fileName.c_str(), &width, &height, &channels, 4);
+    channels = 4;
+    if(img == NULL) {
+        printf("Error in loading the image\n");
+        exit(1);
+    }
+    printf("Loaded image with a width of %dpx, a height of %dpx and %d channels\n", width, height, channels);
+
+    return img;
+}
+
+}
