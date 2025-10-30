@@ -1,4 +1,4 @@
-![](GPUImage.png)
+![GPU Image Editor](GPUImage.png)
 
 # GPU Image Editor
 
