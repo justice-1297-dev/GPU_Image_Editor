@@ -1,93 +1,135 @@
-# Homework 01 - Image Editing
-### Due September 26 @ 11:59pm
+# GPU Image Editor
 
-## Overview
+Personal playground for experimenting with a GPU-accelerated 2D image editor.  
+The project grew out of a class assignment, but this repo is maintained as a standalone
+portfolio piece with a cross-platform setup guide.
 
-Your task in this assignment is to change the c program in [main.cpp](https://github.umn.edu/CSCI-3081-01-F25/public-hw01/blob/main/main.cpp) into a c++ program that uses classes.  You will read through the comments looking for opportunities to create objects.  Our image editor should have at least the following classes:
+## Features
 
-* Application
-* Window
-* Image
-* Texture
-* TexturedRectange
-* ShaderProgram
-* Button
-* (any others that you would like to add)
+- Rendering pipeline split into reusable classes (`Application`, `Window`, `Image`, `Texture`, `TextureRectangle`, `ShaderProgram`, `Button`, `Glyph`, `Quad`).
+- Glad + OpenGL shader pipeline for drawing textured quads.
+- Buttons backed by textures (reset button included) and room for custom image filters.
+- Sample assets (`img_small.jpeg`, `img_large.jpeg`, `grayscale.png`, `reset.png`) for quick experiments.
 
-Define your classes and copy code out of main.cpp into the classes that you write.  Be sure to change the [Makefile](https://github.umn.edu/CSCI-3081-01-F25/public-hw01/blob/main/Makefile) to build your all your code.  We may build or explore a few of these  classes during lecture or in lab.
+## Project Layout
 
-**Single Responsibility Design Principle (High Cohesion)** - Be sure that every class does only one thing and does it well.  Be sure that every method does one thing and one thing well.
+- `*.cpp / *.h` – Core engine code.
+- `lib/glad` – Vendor copy of glad.
+- `lib/stb_image.h` / `stb_image_write.h` – Image IO helpers.
+- `src/shaders` – GLSL shaders.
+- `build/` – Compiled objects and binaries (ignored in Git except for local builds).
+
+## File Structure
+
+```
+.
+├── Application.cpp/.h        # Main application controller
+├── Button.cpp/.h             # UI button logic and rendering
+├── Glyph.cpp/.h              # Text glyph rendering support
+├── Image.cpp/.h              # CPU-side image loading/manipulation
+├── Quad.cpp/.h               # Screen-aligned quad geometry
+├── ShaderProgram.cpp/.h      # GLSL program compilation/usage
+├── Texture.cpp/.h            # OpenGL texture wrapper
+├── TextureRectangle.cpp/.h   # Rectangle texture helper
+├── Window.cpp/.h             # GLFW window lifecycle management
+├── lib/
+│   ├── glad/                 # Glad loader source
+│   └── stb_image*.h          # stb image IO headers
+├── src/
+│   └── shaders/              # GLSL shader sources
+├── build/                    # Local build artifacts
+├── img_*.jpeg, grayscale.png # Sample assets
+└── README.md                 # Project documentation
+```
 
 ## Requirements
 
-1. Create at least the classes specified above.  You may create more classes.
-   * Modify the makefile appropriately to build your program.
-   
-2. Classes should have both a header file (.h) and an implementation file (.cpp).  Be sure to add header guards and follow class practices from class.
-   * Create classes within the namespace csci3081
-   * Use header guards.
-   * Only use ```using namespace``` in the implementation, not the header.
-   * Simple one line function implementations can be in header.
-   * Only use structs for super simple objects.
-   * Follow the **Single Responsibility Principle**.
-     
-3. The ```main.cpp``` should be simple.  For example
-   ```c++
-   #include "Applicaiton.h"
+### Shared Dependencies
 
-   int main() {
-     using namespace csci3081;
-   
-     Application app;
-     app.run();
-   
-     return 0;
-   }
+- C++11-capable compiler (`g++`, `clang++`, or MSVC 2019+).
+- OpenGL loader (glad is already vendored).
+- OpenGL 3.3+ runtime on the host machine.
+- GLFW 3.x development files.
+- CMake 3.3+ (optional; only needed for the CMake workflow).
+
+### Linux
+
+```bash
+sudo apt install build-essential libglfw3-dev
+```
+
+The default `Makefile` links against `/usr/lib/x86_64-linux-gnu/libglfw.so.3.3`.  
+If your distro keeps the library elsewhere, adjust the link line or use `pkg-config --libs glfw3`.
+
+### macOS
+
+```bash
+brew install glfw
+```
+
+Update the link command in `Makefile` to use platform frameworks:
+
+```
+g++ ... -framework OpenGL -lglfw
+```
+
+You may also want to add `-std=c++11` (or higher) if your compiler defaults differ.
+
+### Windows
+
+Pick one of the following setups:
+
+1. **Visual Studio**  
+   - Install the “Desktop Development with C++” workload.  
+   - Build GLFW from source or use a prebuilt binary.  
+   - Link against `opengl32.lib` and `glfw3.lib`, and place `glfw3.dll` next to the executable.
+
+2. **MSYS2 / MinGW-w64**  
+   ```bash
+   pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-glfw
    ```
-   
-4. Follow good memory management practices:
-   * Use ```new``` and ```delete``` in c++.
-   * If any memory is allocated, it must be deleted.
-   * If you have dynamic memory in a class, be sure to implement a copy constructor, the assignment operator, and a destructor.
-     
-5. Implement the Reset button.  When this is clicked, it should remove the drawing on top of the background image.  One way to do this is to reload the image.
-   
-6. Create another button with a new icon.
-   
-7. When the new button is clicked it must modify the background image in some way.  Here are some options:
-   * Threshold the image by intensity.
-   * Grayscale the image.
-   * Change the color of the pen.
-   * Change the shape or size of the pen.
-   * Blur the image.
-   * Sharpen the image.
-   * Edge detect.
-   * Make the colors or a color brighter.
-   * Undo the last pen stroke.
-   * Copy the image to the clipboard.
-   * Rotate the image.
-   * (Many more ideas to consider) -  Be creative!  Remember we will be hopefully releasing some of these to the world, so more diverse features may lead to a better final product.
+   - Adjust the `Makefile` link line to `-lopengl32 -lglfw3 -lgdi32` (path depends on your installation).
 
-## Submission
+## Build and Run
 
-Please submit all your files (excpet the build directory) to the gradescope link provided by the due date.
+### Using the Makefile (default)
 
-## Getting Started
+```bash
+make
+./build/ImageEditor
+```
 
-### On the CSE lab machines (TA Support)
+Run the binary from the repository root so the shaders and textures load correctly via relative paths.
 
-Consider using Vole for remote development here:  [Vole - Virtual Online Linux Environment](https://cse.umn.edu/cseit/self-help-guides/virtual-online-linux-environment-vole)
+### Using CMake (optional)
 
-* Clone the repository
-  ```bash
-  git clone https://github.umn.edu/CSCI-3081-01-F25/public-hw01.git hw01
-  cd hw01
-  ```
-* Build the program
-  ```bash
-  make
-  ```
-* Run the program
-  ```bash
-  ./build/ImageEditor
-  ```
+Update `CMakeLists.txt` so all engine `.cpp` files are listed:
+
+```cmake
+add_executable(ImageEditor
+    main.cpp
+    Application.cpp
+    Button.cpp
+    Glyph.cpp
+    Image.cpp
+    Quad.cpp
+    ShaderProgram.cpp
+    Texture.cpp
+    TextureRectangle.cpp
+    Window.cpp
+    lib/glad/glad.c)
+```
+
+Then:
+
+```bash
+cmake -S . -B build
+cmake --build build
+./build/ImageEditor
+```
+
+## Notes
+
+- Shaders are in `src/shaders`; tweak or add new ones to experiment with effects.
+- The reset button reloads the base image. New buttons can hook into the same event flow.
+- If you extend the project, update this README and the build system so others can follow along.
